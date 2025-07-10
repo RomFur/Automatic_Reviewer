@@ -1,0 +1,9 @@
+ipykernel
+langchain
+ollama
+langchain-ollama
+squarify 
+matplotlib
+plotly
+pandas
+nbformat

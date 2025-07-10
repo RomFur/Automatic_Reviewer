@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+langchain
+ollama
+langchain-ollama
+langchain_community
+python-multipart
