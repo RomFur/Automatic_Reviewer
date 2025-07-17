@@ -573,7 +573,11 @@ SE Advances in Education Research
 CT 2nd International Conference on Social Science and Education (ICSSE)
 CY DEC 24-25, 2013
 CL Hong Kong, PEOPLES R CHINA
-AB It discusses on the evolution and development of volleyball competition regulations in the following aspects: firstly, the modification of volleyball competition regulations are divided as the stages of origin, developing, completed and professional and semi-professional; secondly, the effects of the evolution on volleyball sports are stated in the aspects of strategy, sport structure, team, athlete selection, training methods, etc.
+AB It discusses on the evolution and development of volleyball competition regulations in the 
+following aspects: firstly, the modification of volleyball competition regulations are divided 
+as the stages of origin, developing, completed and professional and semi-professional; secondly, 
+the effects of the evolution on volleyball sports are stated in the aspects of strategy, 
+sport structure, team, athlete selection, training methods, etc.
 SN 2160-1070
 BN 978-1-61275-057-6
 PY 2013
@@ -807,7 +811,35 @@ AF Murphy, Alistair P.
 TI TENNIS FOR PHYSICAL HEALTH: ACUTE AGE- AND GENDER-BASED PHYSIOLOGICAL
    RESPONSES TO CARDIO TENNIS
 SO JOURNAL OF STRENGTH AND CONDITIONING RESEARCH
-AB Murphy, AP, Duffield, R, and Reid, M. Tennis for physical health: Acute age- and gender-based physiological responses to Cardio tennis. J Strength Cond Res 28(11): 3177-3183, 2014This study described physiological and perceptual responses to Cardio tennis for younger and older adult populations of both sexes for health-related outcomes. Thirty-one active participants, each with prior recreational tennis experience (approximate to 2 years) (8 younger and 8 older males, and 7 younger and 8 older females) performed preliminary testing and a 50-minute instructor-led Cardio tennis session. Cardio tennis is a conditioning-based tennis program comprised of warm-up movements, drill-based exercises (set movement and hitting games), and competitive play scenarios. Participants performed the 20-m shuttle run test to determine maximal heart rate (HR) during preliminary testing. Before, after, and 30-minute post Cardio tennis session, HR, blood pressure (BP), rate pressure product (RPP), and capillary blood lactate and glucose were determined. Furthermore, HR and pedometer-derived step counts were measured throughout, while the session was filmed and coded for technical skill. After the session, ratings of perceived exertion, enjoyment, and challenge were obtained. Heart rate, systolic BP, and RPP were significantly increased by Cardio tennis (p 0.05), though returned to pre-exercise levels after 30 minutes (p > 0.05). Heart rate and BP did not differ between groups pre- or 30-minute postexercise (p > 0.05); however, these were lower in younger males during and higher in younger females postsession (p 0.05). Lactate and glucose concentrations were increased in all groups (p 0.05), with lactate being highest in male groups (p 0.05), without differences in glucose between groups (p > 0.05). Stroke and step counts were not different between groups (p > 0.05). Ratings of perceived exertion and perceived challenge were lowest in the younger male group compared with all other groups (p 0.05). Cardio tennis presents as an effective stimulus to invoke sufficient cardiovascular and metabolic load to benefit health and fitness, though age- and sex-based responses should be considered in prescription.
+AB Murphy, AP, Duffield, R, and Reid, M. Tennis for physical health: Acute age- and gender-based 
+physiological responses to Cardio tennis. J Strength Cond Res 28(11): 3177-3183, 2014This study 
+described physiological and perceptual responses to Cardio tennis for younger and older adult 
+populations of both sexes for health-related outcomes. Thirty-one active participants, 
+each with prior recreational tennis experience (approximate to 2 years) (8 younger and 8 
+older males, and 7 younger and 8 older females) performed preliminary testing and a 
+50-minute instructor-led Cardio tennis session. Cardio tennis is a conditioning-based 
+tennis program comprised of warm-up movements, drill-based exercises 
+(set movement and hitting games), and competitive play scenarios. 
+Participants performed the 20-m shuttle run test to determine maximal heart rate 
+(HR) during preliminary testing. Before, after, and 30-minute post Cardio tennis session, 
+HR, blood pressure (BP), rate pressure product (RPP), 
+and capillary blood lactate and glucose were determined. 
+Furthermore, HR and pedometer-derived step counts were measured throughout, 
+while the session was filmed and coded for technical skill. 
+After the session, ratings of perceived exertion, enjoyment, 
+and challenge were obtained. Heart rate, systolic BP, and RPP 
+were significantly increased by Cardio tennis (p 0.05), though 
+returned to pre-exercise levels after 30 minutes (p > 0.05). 
+Heart rate and BP did not differ between groups pre- or 
+30-minute postexercise (p > 0.05); however, these were lower in younger males during and 
+higher in younger females postsession (p 0.05). Lactate and glucose concentrations were 
+increased in all groups (p 0.05), with lactate being highest in male groups (p 0.05), 
+without differences in glucose between groups (p > 0.05). Stroke and step counts were 
+not different between groups (p > 0.05). Ratings of perceived exertion and perceived 
+challenge were lowest in the younger male group compared with all other groups (p 0.05). 
+Cardio tennis presents as an effective stimulus to invoke sufficient cardiovascular and 
+metabolic load to benefit health and fitness, though age- and sex-based responses should 
+be considered in prescription.
 RI Duffield, Rob/G-2660-2017
 OI Duffield, Rob/0000-0002-5641-1314
 SN 1064-8011
@@ -861,7 +893,15 @@ AF Skublewska-Paszkowska, Maria
    Smolka, Jakub
 TI Tennis Patterns Recognition Based on a Novel Tennis Dataset - 3DTennisDS
 SO ADVANCES IN SCIENCE AND TECHNOLOGY-RESEARCH JOURNAL
-AB Many scientific studies on tennis stroke recognition are based on datasets, that have been developed for particular studies, using video or motion capture techniques. The importance of such datasets has been increasing due to the athlete performance evaluation needs. The primary contribution of this study is to present a state-of-the-art 3DTennisDS storing four tennis moves: backhand, forehand, volley backhand as well as volley forehand. The strokes were registered using the Vicon optical motion capture and contain a 39 - marker player and a 7 - marker tennis racket models. The potential and quality of this unique dataset has been verified using spatial-temporal graph neural networks, because this type of network topology matches to the human body structure. The presented 3DTennisDS has been compared with two well-known datasets: the THETIS and the Tennis-Mocap. They contain tennis movements in a form of motion capture data, registered using markerless and marker-based systems. The classification of tennis movements has been performed to verify how different types of data acquisition (marker-based and marker-less ones) as well as the structure of the data affect the accuracy of human action recognition. In this study ONI files from THETIS, bvh from Tennis-Mocap and c3d data from 3DTennisDS were considered. Moreover, the impact of input data fuzzification was examined. The obtained results showed that the classification using 3DTennisDS achieved the best results, both for fuzzy and non-fuzzy inputs. These outcomes indicate that the way of capturing data, its preparation and structure have great influence on classification accuracy. The developed 3DTennisDS has a great potential in further motion capture analysis.
+AB Many scientific studies on tennis stroke recognition are based on datasets, 
+that have been developed for particular studies, using video or motion capture techniques. 
+The importance of such datasets has been increasing due to the athlete performance evaluation needs. 
+The primary contribution of this study is to present a state-of-the-art 3DTennisDS storing four tennis moves: backhand, forehand, volley backhand as well as volley forehand. The strokes were registered using the Vicon optical motion capture and contain a 39 - marker player and a 7 - marker tennis racket models. The potential and quality of this unique dataset has been verified using spatial-temporal graph neural networks, because this type of network topology matches to the human body structure. The presented 3DTennisDS has been compared with two well-known datasets: the THETIS and the Tennis-Mocap. They contain tennis movements in a form of motion capture data, registered using markerless and marker-based systems. The classification of tennis movements has been performed to verify how different types of data acquisition (marker-based and marker-less ones) as well as the structure of the data affect the accuracy of human action recognition. In this study ONI files from THETIS, bvh from Tennis-Mocap and c3d data from 3DTennisDS were considered. Moreover, 
+the impact of input data fuzzification was examined. 
+The obtained results showed that the classification using 3DTennisDS achieved the best results, 
+both for fuzzy and non-fuzzy inputs. These outcomes indicate that the way of capturing data, 
+its preparation and structure have great influence on classification accuracy. The developed 
+3DTennisDS has a great potential in further motion capture analysis.
 RI Skublewska-Paszkowska, Maria/AAA-3471-2021; Lukasik, Edyta/B-3984-2013;
    Powroznik, Pawel/J-2165-2016; Skublewska-Paszkowska, Maria/B-9761-2017;
    Smolka, Jakub/B-5771-2013
@@ -1043,7 +1083,18 @@ CT 16th ITTF 16th International Table Tennis Sports Science Congress
 CY APR 19-20, 2019
 CL Budapest, HUNGARY
 SP ITTF
-AB The purpose of the study was to investigate the effect of changing table tennis ball material for the secondary school table tennis players in Kaohsiung City and the differences in sports training of different table tennis players' background variable. The survey was conducted personally by the researcher, and valid samples of the survey consisted of 197 secondary school table tennis players in Kaohsiung City in 2017. The researcher adopted survey method, and the data were analysed by descriptive statistics, one-way ANOVA, and Pearson correlation. The statistical result revealed that the effect of table tennis ball change: (1) the influence level of "Physical Fitness" was the highest; (2) "Skill", "Physical Fitness" and "Tactics" showed positive correlation. In conclusion, the researcher suggests that: (1) The table tennis coaches need to realize the characters of plastic 40+ table tennis ball and bring professional training model into practice; (2) The table tennis coaches need to consider the individual differences of table tennis players and strengthen the training of stamina and rally.
+AB The purpose of the study was to investigate the effect of changing table tennis ball material for 
+the secondary school table tennis players in Kaohsiung City and the differences in sports training 
+of different table tennis players' background variable. The survey was conducted personally by the 
+researcher, and valid samples of the survey consisted of 197 secondary school table tennis players 
+in Kaohsiung City in 2017. The researcher adopted survey method, and the data were analysed by 
+descriptive statistics, one-way ANOVA, and Pearson correlation. The statistical result revealed 
+that the effect of table tennis ball change: (1) the influence level of "Physical Fitness" was 
+the highest; (2) "Skill", "Physical Fitness" and "Tactics" showed positive correlation. 
+In conclusion, the researcher suggests that: (1) The table tennis coaches need to realize 
+the characters of plastic 40+ table tennis ball and bring professional training model into practice; 
+(2) The table tennis coaches need to consider the individual differences of table tennis players 
+and strengthen the training of stamina and rally.
 BN 978-2-9701466-0-5
 PY 2020
 BP 98

@@ -1,160 +1,240 @@
-import csv
-import re
-from langchain_community.llms import Ollama
+import csv, json, re
+from pathlib import Path
+from typing import List, Tuple
+
+from langchain.llms import Ollama
 from langchain.prompts import PromptTemplate
-import os
 
-def parse_articles(text: str):
-    raw_articles = text.strip().split('ER\n\n')
-    articles = []
-    for raw_article in raw_articles:
-        if not raw_article.strip():
+
+# ───────────── Canonical choice lists ──────────────
+SPORT_CHOICES: List[str] = [
+    "American Football", "Football", "Soccer", "Volleyball", "Beach Volleyball", "Tennis",
+    "Paddle‑Tennis", "Table Tennis", "Basketball", "Rugby", "Badminton", "Athletics",
+    "Baseball", "Softball", "Cricket", "Golf", "Hockey", "Ice Hockey",
+    "Field Hockey", "Handball", "Swimming", "Cycling", "Skiing",
+    "Snowboarding", "Rowing", "Wrestling", "Martial Arts", "Boxing", "MMA", "Kick Boxing",
+    "Muay Thai", "Fencing", "Track and Field", "Triathlon", "Surfing", "Skateboarding",
+    "Ultimate Frisbee", "Lacrosse", "Pickleball", "Netball", "Squash",
+    "Floorball", "Curling", "Gaelic Football", "Hurling", "Kabaddi",
+    "Archery", "Equestrian", "Shooting", "Canoeing/Kayaking", "Climbing"
+]
+
+TECH_CHOICES: List[str] = [
+    "Wearables", "GPS", "IMU", "Accelerometer", "Heart-Rate Monitor", "HRV",
+    "Force Plates", "EMG", "Motion Capture", "Computer Vision", "Machine Learning",
+    "Deep Learning", "Artificial Intelligence", "Video Analysis", "Biomechanical Modelling",
+    "Virtual Reality", "Augmented Reality", "ECG", "EEG", "Thermal Imaging", "Simulation",
+    "3D Printing", "Smart Textiles", "Pressure Insoles", "Pedometer", "Eye Tracking", "Drones"
+]
+
+POP_CHOICES: List[str] = [
+    "Youth", "Adolescents", "Collegiate", "Elite", "Adults", "Players", "School", "Professional",
+    "Sub-Elite", "Amateur", "Recreational", "Masters", "Female", "Male", "Para-Athletes", "Coaches", "Students",
+
+]
+
+OUT_CHOICES: List[str] = [
+    "Performance", "Biomechanics", "Physiology", "Injury Incidence",
+    "Injury Risk", "Injury Severity", "Injury Prevention", "Recovery",
+    "Tactical Behaviour", "Psychology", "Perception",
+    "Decision-Making", "Workload", "Fatigue", "Running Economy",
+    "Endurance", "Speed", "Strength", "Power", "Accuracy", "Endurance", "Motivation", 
+    "Autonomic Function", "Leadership", "Fitness", "Strategy", "Competition",
+    "Teaching Ability", "Knowledge Level",
+    "Precision", "Skill", "Tactics", "Concussion"
+]
+
+
+# ───────────── Simple WoS parser ──────────────
+def parse_articles(raw: str) -> List[Tuple[str, str, str, str]]:
+    """Return (title, abstract, year, ut) for every WoS record in the text."""
+    recs = []
+    for part in raw.strip().split("ER\n\n"):
+        if not part.strip():
+            continue
+        if not re.search(r"^TI ", part, re.M):
             continue
 
-        if not re.search(r'^TI ', raw_article, re.MULTILINE):
-            continue
+        def first(pat):
+            m = re.search(pat, part, re.S | re.M)
+            return m.group(1).strip() if m else ""
 
-        title_match = re.search(r'^TI (.+?)(?=\n[A-Z]{2} |\n$)', raw_article, re.MULTILINE | re.DOTALL)
-        title = title_match.group(1).strip() if title_match else "No title"
+        recs.append(
+            (
+                first(r"^TI (.+?)(?=\n[A-Z]{2} |\n$)") or "No title",
+                first(r"^AB (.+?)(?=\n[A-Z]{2} |\n$)") or "No abstract",
+                first(r"^PY (\d{4})") or "Unknown",
+                first(r"^UT (.+)") or "Unknown",
+            )
+        )
+    return recs
 
-        abstract_match = re.search(r'^AB (.+?)(?=\n[A-Z]{2} |\n$)', raw_article, re.MULTILINE | re.DOTALL)
-        abstract = abstract_match.group(1).strip() if abstract_match else "No abstract"
 
-        year_match = re.search(r'^PY (\d{4})', raw_article, re.MULTILINE)
-        year = year_match.group(1) if year_match else "Unknown"
+# ───────────── LLM helpers ──────────────
+CLASS_PROMPT = """
+Return **JSON only** with the keys **"sport"** and **"technology"**.
 
-        ut_match = re.search(r'^UT (.+)', raw_article, re.MULTILINE)
-        ut = ut_match.group(1).strip() if ut_match else "Unknown"
+• **sport** → choose **exactly one** item from **SPORT_CHOICES** below.  
+Only select a sport if it is clearly and explicitly mentioned or strongly implied in the title or abstract.  
+If none clearly apply, return the string "None".  
+Do not guess, do not pick a sport just because it is common or related.
 
-        articles.append((title, abstract, year, ut))
+• **technology** → choose **zero or more** items from **TECH_CHOICES**  
+― comma-separated, **only include a term if it is explicitly found** in
+either the article title or abstract (case-insensitive).  
+If no technology term is present, you may add your own relevant technology term(s),  
+or return "None" if no suitable term exists.
 
-    return articles
+SPORT_CHOICES = {sport_list}
+TECH_CHOICES  = {tech_list}
 
-def extract_info_from_response(response: str):
-    sport_match = re.search(r"\|\s*.+?\s*\|\s*\{(.+?)\}\s*\|", response)
-    tech_match = re.search(r"\|\s*.+?\s*\|\s*\{.+?\}\s*\|\s*\d{4}\s*\|\s*(.+?)\s*\|", response)
-
-    sport = sport_match.group(1).strip().lower() if sport_match else "unknown"
-    technology = tech_match.group(1).strip() if tech_match else "unknown"
-
-    return sport, technology
-
-def extract_pico_from_response(response: str):
-    def extract(field):
-        match = re.search(rf"{field}:(.*)", response, re.IGNORECASE)
-        if match:
-            return match.group(1).strip().replace("{", "").replace("}", "").replace("None", "").strip()
-        return ""
-
-    p = extract('P')
-    i = extract('I')
-    c = extract('C')
-    o = extract('O')
-
-    return p, i, c, o
-
-classification_prompt_template = """
-You will be given a list of article titles, publication years, and abstracts. 
-Your task is to identify the sport the provided article is **primarily about**.
-
-Only classify an article if the sport is the main focus of the study. 
-Do not classify based on incidental mentions or comparisons.
-
-Identify any **technology** areas that the article focuses on.
-   - Focus on tangible research tools, measurement technologies, data collection, modeling, sensors, AI systems, software frameworks, etc.
-   - Examples include: wearables, GPS, AI, computer vision, video analysis, machine learning, sensors, biomechanics, force plates, EMG, motion capture, etc.
-   - Do **not** list general outcome variables (like "heart rate variability") unless a measurement technology is used to capture them (e.g., ECG, wearables).
-   - If multiple technologies are involved, separate them with commas.
-   - If no technology focus is evident, write {{None}}.
-
-Return a markdown table with 4 columns:
-1. Short title
-2. The sport in curly braces like {{Soccer}}. Use {{Unknown}} if unclear.
-3. Publishing year.
-4. Technology.
-
-### Article ###
-
+### ARTICLE ###
 Title: {title}
-Year: {year}
+Year:  {year}
 Abstract: {abstract}
-
-### Result ###
 """
 
-pico_prompt_template = """
-You will be given the title and abstract of a research article. Extract the following PICO elements:
+PICO_PROMPT = """
+Return **JSON only** with the keys **"population"** and **"outcome"**.
 
-P = Population / Participants / Subjects
-I = Intervention / Exposure / Index factor
-C = Comparison / Control (if any)
-O = Outcome(s) studied
+• **population** → choose the single best match from **POP_CHOICES**.  
+If no listed population fits, you may add your own relevant population term(s),  
+or return "None" if no suitable term exists.
 
-If a component does not exist or cannot be identified, write {{None}}.
+• **outcome** → list **one or more** comma-separated items drawn **only** from
+**OUT_CHOICES** that clearly appear in the abstract or title.  
+If no listed outcome fits, you may add your own relevant outcome term(s),  
+or return "None" if no suitable term exists.
 
-### Article ###
+POP_CHOICES = {pop_list}
+OUT_CHOICES = {out_list}
 
+### ARTICLE ###
 Title: {title}
 Abstract: {abstract}
-
-### PICO Extraction ###
-
-P: ...
-I: ...
-C: ...
-O: ...
 """
 
-async def process_articles(input_file_path: str, output_csv_path: str):
-    with open(input_file_path, 'r', encoding='utf-8') as f:
-        text = f.read()
 
-    articles = parse_articles(text)
+
+
+def first_json(text: str):
+    """
+    Extracts and returns the first valid JSON object from a text blob.
+    Returns {} if no JSON object is found or parsing fails.
+    """
+    try:
+        # Find the first JSON-like block
+        match = re.search(r"\{[\s\S]*?\}", text)
+        return json.loads(match.group(0)) if match else {}
+    except Exception as e:
+        print("JSON parsing error:", e)
+        print("Raw output was:", text)
+        return {}
+
+def clean_ut(ut_raw: str) -> str:
+    m = re.search(r"WOS:\d+", ut_raw)
+    return m.group(0) if m else "Unknown"
+
+# ───────────── Pipeline ──────────────
+async def process_articles(txt_path: str, out_csv: str):
+    text = Path(txt_path).read_text(encoding="utf‑8")
+    records = parse_articles(text)
+
+    records = [
+        (title, abstract, year, clean_ut(ut))
+        for title, abstract, year, ut in records
+    ]
+
     llm = Ollama(model="gemma3")
+    rows = []
 
-    results = []
+    for title, abstract, year, ut in records:
+        # 1) sport / tech --------------------------------------------------
+        prompt1 = PromptTemplate(
+            template=CLASS_PROMPT,
+            input_variables=["title", "year", "abstract", "sport_list", "tech_list"],
+        ).format(
+            title=title,
+            year=year,
+            abstract=abstract,
+            sport_list=SPORT_CHOICES,
+            tech_list=TECH_CHOICES,
+        )
 
-    for title, abstract, year, ut in articles:
-        # Classification step
-        classification_prompt = PromptTemplate(
-            input_variables=["title", "year", "abstract"],
-            template=classification_prompt_template
-        ).format(title=title, year=year, abstract=abstract)
+        info1 = first_json(await llm.ainvoke(prompt1))
 
-        classification_response = await llm.apredict(classification_prompt)
-        sport, technology = extract_info_from_response(classification_response)
-        technology = technology.replace("{", "").replace("}", "").strip()
+        sport = info1.get("sport", "None")
 
-        # PICO step
-        pico_prompt = PromptTemplate(
-            input_variables=["title", "abstract"],
-            template=pico_prompt_template
-        ).format(title=title, abstract=abstract)
+        if sport not in SPORT_CHOICES and sport != "None":
+            sport = "None"
 
-        pico_response = await llm.apredict(pico_prompt)
-        p, i, c, o = extract_pico_from_response(pico_response)
+        raw_tech = info1.get("technology") or []
+        if isinstance(raw_tech, str):
+            raw_tech = [t.strip() for t in raw_tech.split(",") if t.strip()]
+        elif not isinstance(raw_tech, list):
+            raw_tech = []
 
-        clean_title = re.sub(r'\s+', ' ', title).strip()
+        full_text = (title + " " + abstract).lower()
+        present_techs = [t for t in raw_tech if t.lower() in full_text]
+        if not present_techs:
+            present_techs = ["None"]
 
-        print(f"Title: {clean_title}\nYear: {year}\nUT: {ut}\nSport: {sport}\nTechnology: {technology}\nP: {p}\nI: {i}\nC: {c}\nO: {o}\n{'='*60}\n")
+        # 2) population / outcome -----------------------------------------
+        prompt2 = PromptTemplate(
+            template=PICO_PROMPT,
+            input_variables=["title", "abstract", "pop_list", "out_list"],
+        ).format(
+            title=title,
+            abstract=abstract,
+            pop_list=POP_CHOICES,
+            out_list=OUT_CHOICES,
+        )
 
-        results.append({
-            "title": clean_title,
-            "year": year,
-            "ut": ut,
-            "sport": sport,
-            "technology": technology,
-            "p": p,
-            "i": i,
-            "c": c,
-            "o": o
-        })
+        info2 = first_json(await llm.ainvoke(prompt2))
+        
+        clean_title = re.sub(r'\s+', ' ', title)
+        print(
+            f"Title: {clean_title}\n"
+            f"Year: {year}\n"
+            f"UT: {ut}\n"
+            f"Sport: {sport}\n" 
+            f"Population: {info2.get('population', 'None')}\n"
+            f"Technology: {present_techs}\n"
+            f"Outcome: {info2.get('outcome', 'None')}\n"
+            + "="*50 + "\n"
+        )
 
-    # Write CSV
-    with open(output_csv_path, "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=["title", "year", "ut", "sport", "technology", "p", "i", "c", "o"])
+        rows.append(
+            {
+                "ut": ut,
+                "title": re.sub(r"\s+", " ", title),
+                "year": year,
+                "sport": sport, 
+                "population": info2.get("population", "None"),
+                "technology": present_techs,
+                "outcome": info2.get("outcome", "None"),
+            }
+        )
+
+    # write CSV -----------------------------------------------------------
+    with open(out_csv, "w", newline="", encoding="utf‑8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "ut",
+                "title",
+                "year",
+                "sport",
+                "population",
+                "technology",
+                "outcome",
+            ],
+        )
         writer.writeheader()
-        writer.writerows(results)
+        for r in rows:
+            r_cp = r.copy()
+            r_cp["technology"] = json.dumps(r_cp["technology"], ensure_ascii=False)
+            writer.writerow(r_cp)
 
-    print(f"\n✅ Total articles processed: {len(results)}")
-    return output_csv_path, len(results)
+    print(f"✅ {len(rows)} articles saved → {out_csv}")
+    return out_csv, len(rows)
