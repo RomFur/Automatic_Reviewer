@@ -1,48 +1,10 @@
 import csv, json, re
 from pathlib import Path
 from typing import List, Tuple
+from choices import SPORT_CHOICES, TECH_CHOICES, POP_CHOICES, OUT_CHOICES
 
 from langchain.llms import Ollama
 from langchain.prompts import PromptTemplate
-
-
-# ───────────── Canonical choice lists ──────────────
-SPORT_CHOICES: List[str] = [
-    "American Football", "Football", "Soccer", "Volleyball", "Beach Volleyball", "Tennis",
-    "Paddle‑Tennis", "Table Tennis", "Basketball", "Rugby", "Badminton", "Athletics",
-    "Baseball", "Softball", "Cricket", "Golf", "Hockey", "Ice Hockey",
-    "Field Hockey", "Handball", "Swimming", "Cycling", "Skiing",
-    "Snowboarding", "Rowing", "Wrestling", "Martial Arts", "Boxing", "MMA", "Kick Boxing",
-    "Muay Thai", "Fencing", "Track and Field", "Triathlon", "Surfing", "Skateboarding",
-    "Ultimate Frisbee", "Lacrosse", "Pickleball", "Netball", "Squash",
-    "Floorball", "Curling", "Gaelic Football", "Hurling", "Kabaddi",
-    "Archery", "Equestrian", "Shooting", "Canoeing/Kayaking", "Climbing"
-]
-
-TECH_CHOICES: List[str] = [
-    "Wearables", "GPS", "IMU", "Accelerometer", "Heart-Rate Monitor", "HRV",
-    "Force Plates", "EMG", "Motion Capture", "Computer Vision", "Machine Learning",
-    "Deep Learning", "Artificial Intelligence", "Video Analysis", "Biomechanical Modelling",
-    "Virtual Reality", "Augmented Reality", "ECG", "EEG", "Thermal Imaging", "Simulation",
-    "3D Printing", "Smart Textiles", "Pressure Insoles", "Pedometer", "Eye Tracking", "Drones"
-]
-
-POP_CHOICES: List[str] = [
-    "Youth", "Adolescents", "Collegiate", "Elite", "Adults", "Players", "School", "Professional",
-    "Sub-Elite", "Amateur", "Recreational", "Masters", "Female", "Male", "Para-Athletes", "Coaches", "Students",
-
-]
-
-OUT_CHOICES: List[str] = [
-    "Performance", "Biomechanics", "Physiology", "Injury Incidence",
-    "Injury Risk", "Injury Severity", "Injury Prevention", "Recovery",
-    "Tactical Behaviour", "Psychology", "Perception",
-    "Decision-Making", "Workload", "Fatigue", "Running Economy",
-    "Endurance", "Speed", "Strength", "Power", "Accuracy", "Endurance", "Motivation", 
-    "Autonomic Function", "Leadership", "Fitness", "Strategy", "Competition",
-    "Teaching Ability", "Knowledge Level",
-    "Precision", "Skill", "Tactics", "Concussion"
-]
 
 
 # ───────────── Simple WoS parser ──────────────
@@ -74,10 +36,12 @@ def parse_articles(raw: str) -> List[Tuple[str, str, str, str]]:
 CLASS_PROMPT = """
 Return **JSON only** with the keys **"sport"** and **"technology"**.
 
-• **sport** → choose **exactly one** item from **SPORT_CHOICES** below.  
-Only select a sport if it is clearly and explicitly mentioned or strongly implied in the title or abstract.  
+You will be given an article title, publication year, and abstracts. 
+Your task is to identify the sport and technology the provided article is **primarily about**.
+
+• **sport** → Only classify an article if the sport is the main focus of the study. 
+Do not classify based on incidental mentions or comparisons.
 If none clearly apply, return the string "None".  
-Do not guess, do not pick a sport just because it is common or related.
 
 • **technology** → choose **zero or more** items from **TECH_CHOICES**  
 ― comma-separated, **only include a term if it is explicitly found** in
@@ -85,7 +49,6 @@ either the article title or abstract (case-insensitive).
 If no technology term is present, you may add your own relevant technology term(s),  
 or return "None" if no suitable term exists.
 
-SPORT_CHOICES = {sport_list}
 TECH_CHOICES  = {tech_list}
 
 ### ARTICLE ###
@@ -133,7 +96,9 @@ def first_json(text: str):
 
 def clean_ut(ut_raw: str) -> str:
     m = re.search(r"WOS:\d+", ut_raw)
-    return m.group(0) if m else "Unknown"
+    if m:
+        return m.group(0)[:19]  # ensure max 19 characters
+    return "Unknown"
 
 # ───────────── Pipeline ──────────────
 async def process_articles(txt_path: str, out_csv: str):
