@@ -1,20 +1,25 @@
 import mysql.connector
 import csv
 
-def insert_articles_from_csv(csv_file_path: str) -> None:
+def insert_articles_from_csv(
+    csv_file_path: str,
+    host: str,
+    user: str,
+    password: str,
+    database: str
+) -> None:
     """Insert or ignore rows from article_output.csv into MySQL."""
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="articles_db",
+        host=host,
+        user=user,
+        password=password,
+        database=database,
     )
     cursor = conn.cursor()
 
     with open(csv_file_path, newline='', encoding='utf-8') as fh:
         reader = csv.DictReader(fh)
         for row in reader:
-            # Clean / normalise as necessary
             try:
                 cursor.execute(
                     """
@@ -28,9 +33,9 @@ def insert_articles_from_csv(csv_file_path: str) -> None:
                         row.get("title"),
                         int(row["year"]) if row.get("year") else None,
                         row.get("sport"),
-                        row.get("population"), 
+                        row.get("population"),
                         row.get("technology"),
-                        row.get("outcome"),  
+                        row.get("outcome"),
                     ),
                 )
             except Exception as exc:
@@ -40,7 +45,12 @@ def insert_articles_from_csv(csv_file_path: str) -> None:
     cursor.close()
     conn.close()
 
+
 def fetch_articles_filtered(
+    host: str,
+    user: str,
+    password: str,
+    database: str,
     sport: str = None,
     start_year: int = None,
     end_year: int = None,
@@ -49,10 +59,10 @@ def fetch_articles_filtered(
     population: str = None,
 ):
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="articles_db",
+        host=host,
+        user=user,
+        password=password,
+        database=database,
     )
     cursor = conn.cursor(dictionary=True)
 
@@ -93,14 +103,20 @@ def fetch_articles_filtered(
     return rows
 
 
-def fetch_all_articles():
+
+def fetch_all_articles(
+    host: str,
+    user: str,
+    password: str,
+    database: str,
+):
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="articles_db",
+        host=host,
+        user=user,
+        password=password,
+        database=database,
     )
-    cursor = conn.cursor(dictionary=True)  
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM articles")
     rows = cursor.fetchall()
 

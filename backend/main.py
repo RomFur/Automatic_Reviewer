@@ -1,12 +1,21 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Header, HTTPException
 from fastapi.responses import FileResponse
 import os
 from article_processor import process_articles
 from db_utils import insert_articles_from_csv, fetch_all_articles, fetch_articles_filtered
 from choices import SPORT_CHOICES, TECH_CHOICES, POP_CHOICES, OUT_CHOICES
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -21,9 +30,13 @@ def get_all_choices():
     }
 
 @app.get("/articles/")
-def get_all_articles():
-    return fetch_all_articles()
-
+def get_all_articles(
+    x_db_host: str = Header(..., alias="x-db-host"),
+    x_db_user: str = Header(..., alias="x-db-user"),
+    x_db_password: str = Header(..., alias="x-db-password"),
+    x_db_database: str = Header(..., alias="x-db-database"),
+):
+    return fetch_all_articles(x_db_host, x_db_user, x_db_password, x_db_database)
 
 @app.get("/articles/filter/")
 def filter_articles(
@@ -32,9 +45,17 @@ def filter_articles(
     end_year: int = None,
     technology: str = None,
     outcome: str = None,
-    population: str = None
+    population: str = None,
+    x_db_host: str = Header(..., alias="x-db-host"),
+    x_db_user: str = Header(..., alias="x-db-user"),
+    x_db_password: str = Header(..., alias="x-db-password"),
+    x_db_database: str = Header(..., alias="x-db-database"),
 ):
     return fetch_articles_filtered(
+        host=x_db_host,
+        user=x_db_user,
+        password=x_db_password,
+        database=x_db_database,
         sport=sport,
         start_year=start_year,
         end_year=end_year,
@@ -44,19 +65,22 @@ def filter_articles(
     )
 
 @app.post("/process-articles/")
-async def process_articles_endpoint(file: UploadFile = File(...)):
+async def process_articles_endpoint(
+    file: UploadFile = File(...),
+    x_db_host: str = Header(..., alias="x-db-host"),
+    x_db_user: str = Header(..., alias="x-db-user"),
+    x_db_password: str = Header(..., alias="x-db-password"),
+    x_db_database: str = Header(..., alias="x-db-database"),
+):
     input_file_path = os.path.join(UPLOAD_DIR, file.filename)
 
-    # Save uploaded file
     with open(input_file_path, "wb") as buffer:
         buffer.write(await file.read())
 
     output_csv_path = os.path.join(UPLOAD_DIR, "article_output.csv")
-
-    # Process articles asynchronously
     output_file, total_articles = await process_articles(input_file_path, output_csv_path)
 
-    insert_articles_from_csv(output_csv_path)
+    insert_articles_from_csv(output_csv_path, x_db_host, x_db_user, x_db_password, x_db_database)
 
     return FileResponse(
         output_file,
