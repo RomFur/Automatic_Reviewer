@@ -1,3 +1,4 @@
+-- Create a MySQL DB before using app
 CREATE DATABASE IF NOT EXISTS articles_db;
 USE articles_db;
 
