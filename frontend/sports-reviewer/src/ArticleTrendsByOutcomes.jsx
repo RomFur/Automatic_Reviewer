@@ -3,11 +3,11 @@ import {
   LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 
-function ArticleTrendsByTechnology({ credentials, onLogout }) {
+function ArticleTrendsByOutcomes({ credentials, onLogout }) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState('');
-  const [availableTechnologies, setAvailableTechnologies] = useState([]);
-  const [selectedTechnology, setSelectedTechnology] = useState('');
+  const [availableOutcomes, setAvailableOutcomes] = useState([]);
+  const [selectedOutcome, setSelectedOutcome] = useState('');
   const [articlesMap, setArticlesMap] = useState({});
   const [selectedYear, setSelectedYear] = useState(null);
 
@@ -25,54 +25,58 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
         return res.json();
       })
       .then((json) => {
-        const techDataMap = {};
-        const articlesByYearTech = {};
+        const trendDataMap = {};
+        const articlesByYearOutcome = {};
 
-        json.forEach(({ year, technology, ut, title }) => {
-          if (!year || !technology) return;
+        json.forEach(({ year, outcome, ut, title }) => {
+          if (!year || !outcome) return;
 
           const yearStr = String(year).trim();
-
-          const techList = technology
+          const outcomesList = outcome
             .split(',')
-            .map((t) => t.trim())
-            .filter((t) => t && t.toLowerCase() !== '["none"]' && t.toLowerCase() !== 'none');
+            .map((o) => o.trim())
+            .filter((o) => o && o.toLowerCase() !== 'none');
 
-          if (techList.length === 0) return;
+          if (outcomesList.length === 0) return;
 
-          if (!techDataMap[yearStr]) techDataMap[yearStr] = {};
-          if (!articlesByYearTech[yearStr]) articlesByYearTech[yearStr] = {};
+          if (!trendDataMap[yearStr]) trendDataMap[yearStr] = {};
+          if (!articlesByYearOutcome[yearStr]) articlesByYearOutcome[yearStr] = {};
 
-          techList.forEach((tech) => {
-            techDataMap[yearStr][tech] = (techDataMap[yearStr][tech] || 0) + 1;
+          outcomesList.forEach((singleOutcome) => {
+            trendDataMap[yearStr][singleOutcome] = (trendDataMap[yearStr][singleOutcome] || 0) + 1;
 
-            if (!articlesByYearTech[yearStr][tech]) {
-              articlesByYearTech[yearStr][tech] = [];
+            if (!articlesByYearOutcome[yearStr][singleOutcome]) {
+              articlesByYearOutcome[yearStr][singleOutcome] = [];
             }
-            articlesByYearTech[yearStr][tech].push({ ut, title });
+            articlesByYearOutcome[yearStr][singleOutcome].push({ ut, title });
           });
         });
 
-        const allYears = Object.keys(techDataMap).sort((a, b) => a - b);
-        const techSet = new Set();
+        const allYears = Object.keys(trendDataMap).sort((a, b) => a - b);
+        const outcomesSet = new Set();
         allYears.forEach((year) => {
-          Object.keys(techDataMap[year]).forEach((tech) => techSet.add(tech));
+          Object.keys(trendDataMap[year]).forEach((outcome) => outcomesSet.add(outcome));
         });
 
-        const technologies = Array.from(techSet).sort();
+        const outcomes = Array.from(outcomesSet).sort();
+
+        if (outcomes.length === 0) {
+          setError('No outcome data available');
+          return;
+        }
 
         const formattedData = allYears.map((year) => {
           const row = { year };
-          technologies.forEach((tech) => {
-            row[tech] = techDataMap[year][tech] || 0;
+          outcomes.forEach((outcome) => {
+            row[outcome] = trendDataMap[year][outcome] || 0;
           });
           return row;
         });
 
-        setAvailableTechnologies(technologies);
-        setSelectedTechnology(technologies[0] || '');
+        setAvailableOutcomes(outcomes);
+        setSelectedOutcome(outcomes[0] || '');
         setChartData(formattedData);
-        setArticlesMap(articlesByYearTech);
+        setArticlesMap(articlesByYearOutcome);
       })
       .catch(() => setError('database connection error'));
   }, [credentials]);
@@ -88,8 +92,8 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
     );
   }
 
-  if (!chartData) {
-    return <p>Loading technology trends...</p>;
+  if (!chartData || !selectedOutcome) {
+    return <p>Loading outcome trends...</p>;
   }
 
   const handlePointClick = (data) => {
@@ -98,8 +102,8 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
   };
 
   const selectedArticles =
-    selectedYear && selectedTechnology && articlesMap[selectedYear]
-      ? articlesMap[selectedYear][selectedTechnology] || []
+    selectedYear && selectedOutcome && articlesMap[selectedYear]
+      ? articlesMap[selectedYear][selectedOutcome] || []
       : [];
 
   return (
@@ -114,19 +118,19 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
         }}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Article Trends by Technology Over Years</h2>
+          <h2 className="text-2xl font-bold">Article Trends by Outcome Over Years</h2>
 
           <select
-            value={selectedTechnology}
+            value={selectedOutcome}
             onChange={(e) => {
-              setSelectedTechnology(e.target.value);
+              setSelectedOutcome(e.target.value);
               setSelectedYear(null);
             }}
             className="border border-gray-300 rounded px-3 py-1"
           >
-            {availableTechnologies.map((tech) => (
-              <option key={tech} value={tech}>
-                {tech}
+            {availableOutcomes.map((outcome) => (
+              <option key={outcome} value={outcome}>
+                {outcome}
               </option>
             ))}
           </select>
@@ -143,11 +147,11 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
             <YAxis allowDecimals={false} />
             <Tooltip />
             <Legend />
-            {selectedTechnology && (
+            {selectedOutcome && (
               <Line
                 type="monotone"
-                dataKey={selectedTechnology}
-                stroke="#8884d8"
+                dataKey={selectedOutcome}
+                stroke="#ffc658"
                 activeDot={{ r: 8 }}
                 cursor="pointer"
               />
@@ -170,7 +174,7 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
           </button>
 
           <h3 className="text-xl font-semibold mb-2">
-            Articles for {selectedTechnology} in {selectedYear}
+            Articles for {selectedOutcome} in {selectedYear}
           </h3>
           {selectedArticles.length > 0 ? (
             <ul className="list-disc list-inside space-y-2 max-h-[480px] overflow-y-auto">
@@ -188,7 +192,7 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
               ))}
             </ul>
           ) : (
-            <p>No articles available for this technology and year.</p>
+            <p>No articles available for this outcome and year.</p>
           )}
         </div>
       )}
@@ -196,4 +200,4 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
   );
 }
 
-export default ArticleTrendsByTechnology;
+export default ArticleTrendsByOutcomes;

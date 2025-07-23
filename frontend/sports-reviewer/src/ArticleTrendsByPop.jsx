@@ -3,11 +3,11 @@ import {
   LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 
-function ArticleTrendsByTechnology({ credentials, onLogout }) {
+function ArticleTrendsByPop({ credentials, onLogout }) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState('');
-  const [availableTechnologies, setAvailableTechnologies] = useState([]);
-  const [selectedTechnology, setSelectedTechnology] = useState('');
+  const [availablePopulations, setAvailablePopulations] = useState([]);
+  const [selectedPopulation, setSelectedPopulation] = useState('');
   const [articlesMap, setArticlesMap] = useState({});
   const [selectedYear, setSelectedYear] = useState(null);
 
@@ -25,54 +25,45 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
         return res.json();
       })
       .then((json) => {
-        const techDataMap = {};
-        const articlesByYearTech = {};
+        const trendDataMap = {};
+        const articlesByYearPopulation = {};
 
-        json.forEach(({ year, technology, ut, title }) => {
-          if (!year || !technology) return;
+        json.forEach(({ year, population, ut, title }) => {
+          if (!year || !population) return;
 
           const yearStr = String(year).trim();
+          const populationStr = population.trim();
 
-          const techList = technology
-            .split(',')
-            .map((t) => t.trim())
-            .filter((t) => t && t.toLowerCase() !== '["none"]' && t.toLowerCase() !== 'none');
+          if (populationStr === 'None') return;
 
-          if (techList.length === 0) return;
+          if (!trendDataMap[yearStr]) trendDataMap[yearStr] = {};
+          trendDataMap[yearStr][populationStr] = (trendDataMap[yearStr][populationStr] || 0) + 1;
 
-          if (!techDataMap[yearStr]) techDataMap[yearStr] = {};
-          if (!articlesByYearTech[yearStr]) articlesByYearTech[yearStr] = {};
-
-          techList.forEach((tech) => {
-            techDataMap[yearStr][tech] = (techDataMap[yearStr][tech] || 0) + 1;
-
-            if (!articlesByYearTech[yearStr][tech]) {
-              articlesByYearTech[yearStr][tech] = [];
-            }
-            articlesByYearTech[yearStr][tech].push({ ut, title });
-          });
+          if (!articlesByYearPopulation[yearStr]) articlesByYearPopulation[yearStr] = {};
+          if (!articlesByYearPopulation[yearStr][populationStr]) articlesByYearPopulation[yearStr][populationStr] = [];
+          articlesByYearPopulation[yearStr][populationStr].push({ ut, title });
         });
 
-        const allYears = Object.keys(techDataMap).sort((a, b) => a - b);
-        const techSet = new Set();
+        const allYears = Object.keys(trendDataMap).sort((a, b) => a - b);
+        const populationSet = new Set();
         allYears.forEach((year) => {
-          Object.keys(techDataMap[year]).forEach((tech) => techSet.add(tech));
+          Object.keys(trendDataMap[year]).forEach((population) => populationSet.add(population));
         });
 
-        const technologies = Array.from(techSet).sort();
+        const populations = Array.from(populationSet).sort();
 
         const formattedData = allYears.map((year) => {
           const row = { year };
-          technologies.forEach((tech) => {
-            row[tech] = techDataMap[year][tech] || 0;
+          populations.forEach((pop) => {
+            row[pop] = trendDataMap[year][pop] || 0;
           });
           return row;
         });
 
-        setAvailableTechnologies(technologies);
-        setSelectedTechnology(technologies[0] || '');
+        setAvailablePopulations(populations);
+        setSelectedPopulation(populations[0] || '');
         setChartData(formattedData);
-        setArticlesMap(articlesByYearTech);
+        setArticlesMap(articlesByYearPopulation);
       })
       .catch(() => setError('database connection error'));
   }, [credentials]);
@@ -89,7 +80,7 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
   }
 
   if (!chartData) {
-    return <p>Loading technology trends...</p>;
+    return <p>Loading population trends...</p>;
   }
 
   const handlePointClick = (data) => {
@@ -98,8 +89,8 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
   };
 
   const selectedArticles =
-    selectedYear && selectedTechnology && articlesMap[selectedYear]
-      ? articlesMap[selectedYear][selectedTechnology] || []
+    selectedYear && selectedPopulation && articlesMap[selectedYear]
+      ? articlesMap[selectedYear][selectedPopulation] || []
       : [];
 
   return (
@@ -114,19 +105,19 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
         }}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Article Trends by Technology Over Years</h2>
+          <h2 className="text-2xl font-bold">Article Trends by Population Over Years</h2>
 
           <select
-            value={selectedTechnology}
+            value={selectedPopulation}
             onChange={(e) => {
-              setSelectedTechnology(e.target.value);
+              setSelectedPopulation(e.target.value);
               setSelectedYear(null);
             }}
             className="border border-gray-300 rounded px-3 py-1"
           >
-            {availableTechnologies.map((tech) => (
-              <option key={tech} value={tech}>
-                {tech}
+            {availablePopulations.map((pop) => (
+              <option key={pop} value={pop}>
+                {pop}
               </option>
             ))}
           </select>
@@ -143,11 +134,11 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
             <YAxis allowDecimals={false} />
             <Tooltip />
             <Legend />
-            {selectedTechnology && (
+            {selectedPopulation && (
               <Line
                 type="monotone"
-                dataKey={selectedTechnology}
-                stroke="#8884d8"
+                dataKey={selectedPopulation}
+                stroke="#82ca9d"
                 activeDot={{ r: 8 }}
                 cursor="pointer"
               />
@@ -170,7 +161,7 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
           </button>
 
           <h3 className="text-xl font-semibold mb-2">
-            Articles for {selectedTechnology} in {selectedYear}
+            Articles for {selectedPopulation} in {selectedYear}
           </h3>
           {selectedArticles.length > 0 ? (
             <ul className="list-disc list-inside space-y-2 max-h-[480px] overflow-y-auto">
@@ -188,7 +179,7 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
               ))}
             </ul>
           ) : (
-            <p>No articles available for this technology and year.</p>
+            <p>No articles available for this population and year.</p>
           )}
         </div>
       )}
@@ -196,4 +187,4 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
   );
 }
 
-export default ArticleTrendsByTechnology;
+export default ArticleTrendsByPop;

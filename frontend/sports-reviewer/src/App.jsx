@@ -3,6 +3,10 @@ import LoginPage from './LoginPage.jsx';
 import TreemapPage from './TreemapPage.jsx';
 import ArticleTrendsBySport from './ArticleTrendsBySport.jsx';
 import ArticleTrendsByTechnology from './ArticleTrendsByTech.jsx';
+import ArticleTrendsByPop from './ArticleTrendsByPop.jsx';
+import ArticleTrendsByOutcomes from './ArticleTrendsByOutcomes.jsx';
+
+
 
 function App() {
   const [credentials, setCredentials] = useState(null);
@@ -48,6 +52,26 @@ function App() {
               >
                 Technology Trends
               </button>
+              <button
+                onClick={() => setActiveTab('population')} // ✅ 2. Add population tab
+                className={`px-4 py-2 rounded ${
+                  activeTab === 'population'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Population Trends
+              </button>
+              <button
+                onClick={() => setActiveTab('outcomes')}
+                className={`px-4 py-2 rounded ${
+                  activeTab === 'outcomes'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Outcome Trends
+              </button>
             </div>
             <button
               onClick={() => setCredentials(null)}
@@ -61,6 +85,8 @@ function App() {
             {activeTab === 'treemap' && <TreemapPage credentials={credentials} />}
             {activeTab === 'sport' && <ArticleTrendsBySport credentials={credentials} onLogout={() => setCredentials(null)} />}
             {activeTab === 'technology' && <ArticleTrendsByTechnology credentials={credentials} onLogout={() => setCredentials(null)} />}
+            {activeTab === 'population' && <ArticleTrendsByPop credentials={credentials} onLogout={() => setCredentials(null)} />}
+            {activeTab === 'outcomes' && <ArticleTrendsByOutcomes credentials={credentials} onLogout={() => setCredentials(null)} />}
           </div>
         </div>
       )}
