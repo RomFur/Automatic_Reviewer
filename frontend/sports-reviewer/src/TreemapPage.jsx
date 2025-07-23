@@ -4,15 +4,22 @@ import { Treemap, Tooltip, ResponsiveContainer } from 'recharts';
 function TreemapPage({ credentials, onLogout }) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState('');
+  const [choices, setChoices] = useState(null);
+  const [filters, setFilters] = useState({
+    startYear: '',
+    endYear: '',
+    technology: '',
+    population: '',
+    outcome: '',
+  });
 
   useEffect(() => {
     const headers = {
-        'x-db-host': credentials.host,
-        'x-db-database': credentials.database,
-        'x-db-user': credentials.user,
-        'x-db-password': credentials.password,
+      'x-db-host': credentials.host,
+      'x-db-database': credentials.database,
+      'x-db-user': credentials.user,
+      'x-db-password': credentials.password,
     };
-
 
     fetch('http://localhost:8000/articles/', { headers })
       .then(async (res) => {
@@ -21,7 +28,47 @@ function TreemapPage({ credentials, onLogout }) {
       })
       .then((json) => {
         const sportCount = {};
-        json.forEach((item) => {
+        json.articles.forEach((item) => {
+          const sport = item.sport;
+          if (sport && sport !== 'None') {
+            sportCount[sport] = (sportCount[sport] || 0) + 1;
+          }
+        });
+
+        const formatted = Object.entries(sportCount).map(([name, size]) => ({
+          name,
+          size,
+        }));
+
+        setChartData(formatted);
+        setChoices(json.filters); // filters = { outcomes, populations, technologies }
+      })
+      .catch(() => setError('database connection error'));
+  }, [credentials]);
+
+  const handleFilter = () => {
+    const headers = {
+      'x-db-host': credentials.host,
+      'x-db-database': credentials.database,
+      'x-db-user': credentials.user,
+      'x-db-password': credentials.password,
+    };
+
+    const params = new URLSearchParams();
+    if (filters.startYear) params.append('start_year', filters.startYear);
+    if (filters.endYear) params.append('end_year', filters.endYear);
+    if (filters.technology) params.append('technology', filters.technology);
+    if (filters.population) params.append('population', filters.population);
+    if (filters.outcome) params.append('outcome', filters.outcome);
+
+    fetch(`http://localhost:8000/articles/filter/?${params.toString()}`, { headers })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('filtering error');
+        return res.json();
+      })
+      .then((filteredArticles) => {
+        const sportCount = {};
+        filteredArticles.forEach((item) => {
           const sport = item.sport;
           if (sport && sport !== 'None') {
             sportCount[sport] = (sportCount[sport] || 0) + 1;
@@ -36,7 +83,7 @@ function TreemapPage({ credentials, onLogout }) {
         setChartData(formatted);
       })
       .catch(() => setError('database connection error'));
-  }, [credentials]);
+  };
 
   if (error) {
     return (
@@ -52,12 +99,12 @@ function TreemapPage({ credentials, onLogout }) {
     );
   }
 
-  if (!chartData) {
+  if (!chartData || !choices) {
     return <p>Loading articles...</p>;
   }
 
   return (
-    <div className="w-full max-w-6xl h-[800px] bg-white p-0 rounded shadow-md">
+    <div className="w-full max-w-6xl mx-auto h-[900px] bg-white p-6 rounded shadow-md">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Sports Treemap</h2>
         <button
@@ -68,7 +115,62 @@ function TreemapPage({ credentials, onLogout }) {
         </button>
       </div>
 
-      <ResponsiveContainer width="100%" height="100%">
+      {/* Filter controls */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+        <input
+          type="number"
+          placeholder="Start Year"
+          value={filters.startYear}
+          onChange={(e) => setFilters({ ...filters, startYear: e.target.value })}
+          className="border px-2 py-1 rounded"
+        />
+        <input
+          type="number"
+          placeholder="End Year"
+          value={filters.endYear}
+          onChange={(e) => setFilters({ ...filters, endYear: e.target.value })}
+          className="border px-2 py-1 rounded"
+        />
+        <select
+          value={filters.technology}
+          onChange={(e) => setFilters({ ...filters, technology: e.target.value })}
+          className="border px-2 py-1 rounded"
+        >
+          <option value="">All Technologies</option>
+          {choices.technologies.map((tech) => (
+            <option key={tech} value={tech}>{tech}</option>
+          ))}
+        </select>
+        <select
+          value={filters.population}
+          onChange={(e) => setFilters({ ...filters, population: e.target.value })}
+          className="border px-2 py-1 rounded"
+        >
+          <option value="">All Populations</option>
+          {choices.populations.map((pop) => (
+            <option key={pop} value={pop}>{pop}</option>
+          ))}
+        </select>
+        <select
+          value={filters.outcome}
+          onChange={(e) => setFilters({ ...filters, outcome: e.target.value })}
+          className="border px-2 py-1 rounded"
+        >
+          <option value="">All Outcomes</option>
+          {choices.outcomes.map((out) => (
+            <option key={out} value={out}>{out}</option>
+          ))}
+        </select>
+        <button
+          onClick={handleFilter}
+          className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
+        >
+          Apply Filters
+        </button>
+      </div>
+
+      {/* Treemap chart */}
+      <ResponsiveContainer width="100%" height={700}>
         <Treemap
           data={chartData}
           dataKey="size"
@@ -81,7 +183,6 @@ function TreemapPage({ credentials, onLogout }) {
       </ResponsiveContainer>
     </div>
   );
-
 }
 
 export default TreemapPage;
