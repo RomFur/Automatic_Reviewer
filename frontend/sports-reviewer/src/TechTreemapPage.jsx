@@ -16,6 +16,15 @@ function TechTreemapPage({ credentials }) {
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
 
+  // Utility to extract individual tech terms cleanly
+  const extractTechnologies = (techString) => {
+    return techString
+      .replace(/[\[\]"]+/g, '') // remove brackets and quotes
+      .split(',')
+      .map((t) => t.trim())
+      .filter((t) => t); // remove empty
+  };
+
   useEffect(() => {
     const headers = {
       'x-db-host': credentials.host,
@@ -36,15 +45,18 @@ function TechTreemapPage({ credentials }) {
         json.articles.forEach((item) => {
           const tech = item.technology;
           if (tech && tech !== 'None') {
-            techCount[tech] = (techCount[tech] || 0) + 1;
+            extractTechnologies(tech).forEach((t) => {
+              techCount[t] = (techCount[t] || 0) + 1;
+            });
           }
         });
 
-        const formatted = Object.entries(techCount).map(([name, size]) => ({
-          name,
-          size,
-        }));
-
+        const formatted = Object.entries(techCount)
+            .filter(([name]) => name.toLowerCase() !== 'none')
+            .map(([name, size]) => ({
+                name,
+                size,
+            }));
         setChartData(formatted);
         setChoices(json.filters);
       })
@@ -78,15 +90,18 @@ function TechTreemapPage({ credentials }) {
         filteredArticles.forEach((item) => {
           const tech = item.technology;
           if (tech && tech !== 'None') {
-            techCount[tech] = (techCount[tech] || 0) + 1;
+            extractTechnologies(tech).forEach((t) => {
+              techCount[t] = (techCount[t] || 0) + 1;
+            });
           }
         });
 
-        const formatted = Object.entries(techCount).map(([name, size]) => ({
-          name,
-          size,
-        }));
-
+        const formatted = Object.entries(techCount)
+            .filter(([name]) => name.toLowerCase() !== 'none')
+            .map(([name, size]) => ({
+                name,
+                size,
+            }));
         setChartData(formatted);
         setSelectedTechnology(null);
       })
@@ -112,7 +127,10 @@ function TechTreemapPage({ credentials }) {
   }
 
   const selectedArticles = selectedTechnology
-    ? allArticles.filter((a) => a.technology === selectedTechnology)
+    ? allArticles.filter((a) =>
+        a.technology &&
+        extractTechnologies(a.technology).includes(selectedTechnology)
+      )
     : [];
 
   return (
@@ -226,4 +244,3 @@ function TechTreemapPage({ credentials }) {
 }
 
 export default TechTreemapPage;
-

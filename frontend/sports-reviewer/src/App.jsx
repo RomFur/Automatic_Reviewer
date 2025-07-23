@@ -61,7 +61,7 @@ function App() {
               onClick={() => setCredentials(null)}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
-              Logout
+              Disconnect
             </button>
           </div>
 
