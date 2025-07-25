@@ -21,7 +21,7 @@ TECH_CHOICES = [
     "Pedometer", "Eye Tracking", "Drones", "5G", "Big Data", "Cloud Computing", "Cybersecurity",
     "Data Mining", "Database",  "Assistive Technology", "Blockchain", "Brain-Computer Interfaces",
     "CAD", "Digital Twins", "Edge Computing", "Internet of Things", "Metaverse", "Neural Network",
-    "Quantum Computing", "RFID", "Sensor Fusion",              
+    "Quantum Computing", "RFID", "Sensor Fusion", "Information Technology"              
 ]
 
 POP_CHOICES = [

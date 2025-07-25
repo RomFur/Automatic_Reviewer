@@ -837,7 +837,14 @@ CT 26th International-Business-Information-Management-Association
 CY NOV 11-12, 2015
 CL Madrid, SPAIN
 SP Int Business Informat Management Assoc
-AB The aim and focus of this study was to examine the changes in sport and with the sport's stakeholders with the introduction of technologies. The examination was conducted through series of interviews (n=36) and a review of the literature to gain understandings from three areas: (1) Professional players and coaches of professional players (2) Amateur players and coaches at amateur levels and (3) Spectators. The findings presented that players at the professional level are using various technologies such as GPS vests to manage workload and reduce risk of injury. With amateur level sport, technologies are not as prevalent and the possible introduction of technology was surprisingly not considered as imperative. Spectators, in general, considered that the introduction of technologies changed the dimensions of their involvement positively and negatively. The findings provide a basis for further studies and possible trials with additional technologies to further assist the athlete and coaches and innovatively enhance the spectator's experience.
+AB The aim and focus of this study was to examine the changes in sport and with the sport's stakeholders with the introduction of technologies. 
+The examination was conducted through series of interviews (n=36) and a review of the literature to gain understandings from three areas: (1) 
+Professional players and coaches of professional players (2) Amateur players and coaches at amateur levels and (3) Spectators. 
+The findings presented that players at the professional level are using various technologies such as GPS vests to manage workload 
+and reduce risk of injury. With amateur level sport, technologies are not as prevalent and the possible introduction of technology 
+was surprisingly not considered as imperative. Spectators, in general, considered that the introduction of technologies changed the 
+dimensions of their involvement positively and negatively. The findings provide a basis for further studies and possible trials with 
+additional technologies to further assist the athlete and coaches and innovatively enhance the spectator's experience.
 OI Leveaux, Rene/0000-0002-8050-3016
 BN 978-0-9860419-5-2
 PY 2015
@@ -1276,7 +1283,12 @@ AU Dyer, B
 AF Dyer, Bryce
 TI The controversy of sports technology: a systematic review
 SO SPRINGERPLUS
-AB Changes or introductions of technology or equipment can affect how a sport is played or influence its performances. This article conducted a systematic review of peer-reviewed literature to identify any case studies of controversial events surrounding the implementation or use of sports technology. 56 articles were identified that highlighted 31 different case studies found over a three decade time period. Thematic analysis revealed six distinctive themes when reviewing the articles. Whilst the sport of golf had the highest number of case studies, it was found that a significant level of attention had been recorded in the cases of Oscar Pistorius use of prosthetic legs in athletics and the use of full length swimsuits in swimming. The trend surrounding the number of articles was shown to be initially intermittent but saw a peak period from 2008 to 2010. However, the frequency of such articles since this peak has been more consistent. It is proposed that long periods of time without intervention or resolution by a governing body often increases the peer-reviewed attention paid to such cases in examples such as those identified in this systematic review.
+AB Changes or introductions of technology or equipment can affect how a sport is played or influence its performances. This article conducted a systematic review of peer-reviewed literature to identify 
+any case studies of controversial events surrounding the implementation or use of sports technology. 56 articles were identified that highlighted 31 different case studies found over a three decade 
+time period. Thematic analysis revealed six distinctive themes when reviewing the articles. Whilst the sport of golf had the highest number of case studies, it was found that a significant level of 
+attention had been recorded in the cases of Oscar Pistorius use of prosthetic legs in athletics and the use of full length swimsuits in swimming. The trend surrounding the number of articles was 
+shown to be initially intermittent but saw a peak period from 2008 to 2010. However, the frequency of such articles since this peak has been more consistent. It is proposed that long periods of 
+time without intervention or resolution by a governing body often increases the peer-reviewed attention paid to such cases in examples such as those identified in this systematic review.
 SN 2193-1801
 PD SEP 18
 PY 2015
@@ -1298,7 +1310,13 @@ TI Exploring technology acceptance patterns of users of the mixed-reality
    sport technology Zwift: antecedents and consequences of technology
    acceptance
 SO UNIVERSAL ACCESS IN THE INFORMATION SOCIETY
-AB The use of digital technologies in sports is increasing. The current paper deals with the technology acceptance of users of a mixed-reality sport technology called Zwift. The purpose of this study is to identify distinct profiles of Zwift users based on indicators of technology acceptance. Latent profile analysis (n = 877) identified three distinct latent profiles representing subgroups characterized by moderate, high and very high acceptance indicators. Results of the multinomial regression show that individuals with higher perceptions of the basic psychological need for autonomy and relatedness as well as individuals with high data privacy perceptions are more likely to be classified in the very high and high acceptance profiles than in the moderate acceptance profile. The results also show that older individuals are more likely to be classified in the moderate acceptance profile than in the very high acceptance profile even though odds ratio is rather low. The high and very high acceptance profiles also show higher behavioural intention to use Zwift in the future than the moderate acceptance profile.
+AB The use of digital technologies in sports is increasing. The current paper deals with the technology acceptance of users of a mixed-reality sport technology called Zwift. 
+The purpose of this study is to identify distinct profiles of Zwift users based on indicators of technology acceptance. Latent profile analysis (n = 877) identified three 
+distinct latent profiles representing subgroups characterized by moderate, high and very high acceptance indicators. Results of the multinomial regression show that individuals 
+with higher perceptions of the basic psychological need for autonomy and relatedness as well as individuals with high data privacy perceptions are more likely to be classified in 
+the very high and high acceptance profiles than in the moderate acceptance profile. The results also show that older individuals are more likely to be classified in the moderate 
+acceptance profile than in the very high acceptance profile even though odds ratio is rather low. The high and very high acceptance profiles also show higher behavioural intention 
+to use Zwift in the future than the moderate acceptance profile.
 RI Methlagl, Michael/GRX-6477-2022
 OI Methlagl, Michael/0000-0001-5110-4473
 SN 1615-5289
@@ -2110,7 +2128,18 @@ AF Reyaz, Nahida
    Rahmani, Khalid Imam
 TI Information communication and technology in sports: a meticulous review
 SO FRONTIERS IN SPORTS AND ACTIVE LIVING
-AB IntroductionSports of all kinds even though have an alluring property of keeping their onlookers stuck to their place, the introduction of Technology, however, revolutionized it all together. Not only in legal sports but also the training and teaching methods have been reformed. The use of Information Communication and Technology (ICT) based technologies [Convolutional Neural Networks (CNN), Hawkeye, Computer vision, Artificial intelligence, etc.] has moderately increased the interactive nature of sports. Employing ICT-driven technologies have continuously been increasing performance levels due to which high effective performance levels have been achieved. In addition to offering information to the users, it also acts as a means for connecting and interacting with the remaining world. In this article, we provide a review of the studies considering the developments and impact of employing ICT technology on sports, especially cricket. The study has focussed on domain-specific developments in cricket sports: developments in the batting domain, bowling domain, and wicketkeeping as well. MethodsFor the study, the analysis has been done following the PRISMA guidelines. ResultsThe study found that even though the researchers have done justifiable work in employing technology in sports as a whole but the domain-specific contribution in sports like cricket is not at the level as is need of the hour. In addition to the mentioned domains in the study, the research should gain speed in other domains like domain-specific Talent Identification for both genders, different age groups, diverse sports, etc. Discussionundoubtedly, the sports domain is employing technology at a vast level but a few domains like sports talent identification especially related to the most famous games like cricket require an immediate and intense focus of the researchers. Since this domain is still carrying out a traditional coach-oriented approach. There is an acute need to revolutionize the domain by incorporating modern technologies into it.
+AB IntroductionSports of all kinds even though have an alluring property of keeping their onlookers stuck to their place, the introduction of Technology, however, 
+revolutionized it all together. Not only in legal sports but also the training and teaching methods have been reformed. The use of Information Communication and Technology (ICT) 
+based technologies [Convolutional Neural Networks (CNN), Hawkeye, Computer vision, Artificial intelligence, etc.] has moderately increased the interactive nature of sports. 
+Employing ICT-driven technologies have continuously been increasing performance levels due to which high effective performance levels have been achieved. In addition to offering information to the users, 
+it also acts as a means for connecting and interacting with the remaining world. In this article, we provide a review of the studies considering the developments and impact of employing ICT technology on 
+sports, especially cricket. The study has focussed on domain-specific developments in cricket sports: developments in the batting domain, bowling domain, and wicketkeeping as well. MethodsFor the 
+study, the analysis has been done following the PRISMA guidelines. ResultsThe study found that even though the researchers have done justifiable work in employing technology in 
+sports as a whole but the domain-specific contribution in sports like cricket is not at the level as is need of the hour. In addition to the mentioned domains in the study, 
+the research should gain speed in other domains like domain-specific Talent Identification for both genders, different age groups, diverse sports, etc. Discussionundoubtedly, 
+the sports domain is employing technology at a vast level but a few domains like sports talent identification especially related to the most famous games like cricket require 
+an immediate and intense focus of the researchers. Since this domain is still carrying out a traditional coach-oriented approach. There is an acute need to revolutionize the 
+domain by incorporating modern technologies into it.
 RI Naseem, Mohd/G-1655-2015; Ahamad, Dr Gulfam/HPB-5164-2023; Ali,
    Javed/L-9427-2015; Rahmani, Mohammad Khalid Imam/AAD-1141-2019
 EI 2624-9367
@@ -3290,7 +3319,16 @@ AF Zhang, Yichan
 TI Transforming sports training through the integration of internet
    technology and artificial intelligence
 SO SOFT COMPUTING
-AB The Internet of Things (IoT) has gained significant popularity through wearable technologies. Several IoT devices are used in educational institutions, smart homes, and security management. Their widespread use in sports training applications using IoT (WS-IoT)-based wearable sensors is noteworthy. Meanwhile, artificial intelligence (AI) has evolved rapidly, and its applications have expanded across many diverse fields. Over the past few years, China has placed greater emphasis on physical education to enhance students' physical fitness and overall capabilities. A significant number of colleges and universities have adopted artificial intelligence to transform traditional single-mode sports training methods. This paper introduces a continuous monitoring system for sports individuals using the WS-IoT. The goal of coaches is to maximize the results of athlete training across various sports events using AI technology and their sports expertise. In this study, we examine the use of AI technology in sports and assess the practical implications of its implementation. To achieve the objective function, we used a Bayesian deep classifier and deep learning algorithms that utilize adaptive optimization. Utilizing artificial intelligence in Chinese educational institutions improves training efficiency and effectiveness. The system was then rigorously tested and analyzed in terms of the quality-of-service parameters, including communication collisions and packet loss rates. It is shown that packet loss rates increase with increasing packet numbers, but collision rates remain unchanged. Furthermore, a practical application of the system in colleges and universities showed that 14.4% of the students were extremely satisfied with the use of teaching materials, 24.5% were satisfied with the materials, 30.1% were satisfied with the training methods, and 17.9% were dissatisfied.
+AB The Internet of Things (IoT) has gained significant popularity through wearable technologies. Several IoT devices are used in educational institutions, smart homes, and security management. 
+Their widespread use in sports training applications using IoT (WS-IoT)-based wearable sensors is noteworthy. Meanwhile, artificial intelligence (AI) has evolved rapidly, and its applications 
+have expanded across many diverse fields. Over the past few years, China has placed greater emphasis on physical education to enhance students' physical fitness and overall capabilities. 
+A significant number of colleges and universities have adopted artificial intelligence to transform traditional single-mode sports training methods. This paper introduces a continuous monitoring system for sports 
+individuals using the WS-IoT. The goal of coaches is to maximize the results of athlete training across various sports events using AI technology and their sports expertise. In this study, we examine the use of 
+AI technology in sports and assess the practical implications of its implementation. To achieve the objective function, we used a Bayesian deep classifier and deep learning algorithms that utilize adaptive 
+optimization. Utilizing artificial intelligence in Chinese educational institutions improves training efficiency and effectiveness. The system was then rigorously tested and analyzed in terms 
+of the quality-of-service parameters, including communication collisions and packet loss rates. It is shown that packet loss rates increase with increasing packet numbers, but collision rates 
+remain unchanged. Furthermore, a practical application of the system in colleges and universities showed that 14.4% of the students were extremely satisfied with the use of teaching materials, 
+24.5% were satisfied with the materials, 30.1% were satisfied with the training methods, and 17.9% were dissatisfied.
 RI Duan, Wentao/E-5742-2011
 SN 1432-7643
 EI 1433-7479
@@ -3389,7 +3427,14 @@ AU Aughey, RJ
 AF Aughey, Robert J.
 TI Applications of GPS Technologies to Field Sports
 SO INTERNATIONAL JOURNAL OF SPORTS PHYSIOLOGY AND PERFORMANCE
-AB Global positioning system (GPS) technology was made possible after the invention of the atomic clock. The first suggestion that GPS could be used to assess the physical activity of humans followed some 40 y later. There was a rapid uptake of GPS technology, with the literature concentrating on validation studies and the measurement of steady-state movement. The first attempts were made to validate GPS for field sport applications in 2006. While GPS has been validated for applications for team sports, some doubts continue to exist on the appropriateness of GPS for measuring short high-velocity movements. Thus, GPS has been applied extensively in Australian football, cricket, hockey, rugby union and league, and soccer. There is extensive information on the activity profile of athletes from field sports in the literature stemming from GPS, and this includes total distance covered by players and distance in velocity bands. Global positioning systems have also been applied to detect fatigue in matches, identify periods of most intense play, different activity profiles by position, competition level, and sport. More recent research has integrated GPS data with the physical capacity or fitness test score of athletes, game-specific tasks, or tactical or strategic information. The future of GPS analysis will involve further miniaturization of devices, longer battery life, and integration of other inertial sensor data to more effectively quantify the effort of athletes.
+AB Global positioning system (GPS) technology was made possible after the invention of the atomic clock. The first suggestion that GPS could be used to assess the physical activity of humans followed 
+some 40 y later. There was a rapid uptake of GPS technology, with the literature concentrating on validation studies and the measurement of steady-state movement. The first attempts were made to 
+validate GPS for field sport applications in 2006. While GPS has been validated for applications for team sports, some doubts continue to exist on the appropriateness of GPS for measuring short 
+high-velocity movements. Thus, GPS has been applied extensively in Australian football, cricket, hockey, rugby union and league, and soccer. There is extensive information on the activity profile 
+of athletes from field sports in the literature stemming from GPS, and this includes total distance covered by players and distance in velocity bands. Global positioning systems have also been 
+applied to detect fatigue in matches, identify periods of most intense play, different activity profiles by position, competition level, and sport. More recent research has integrated GPS data 
+with the physical capacity or fitness test score of athletes, game-specific tasks, or tactical or strategic information. The future of GPS analysis will involve further miniaturization of 
+devices, longer battery life, and integration of other inertial sensor data to more effectively quantify the effort of athletes.
 RI Aughey, Rob/B-9270-2011
 OI Aughey, Robert/0000-0002-0285-8516
 SN 1555-0265
@@ -3584,7 +3629,13 @@ AF Matsuwaka, Sean T.
    Latzka, Erek W.
 TI Summer Adaptive Sports Technology, Equipment, and Injuries
 SO SPORTS MEDICINE AND ARTHROSCOPY REVIEW
-AB As adaptive sports grow in popularity, it is increasingly important to understand the injuries for which their athletes are at risk. This population is challenging to study given its small size and diversity of its participants; accordingly, research is mostly low quality because of limited sample sizes and study durations. Summer adaptive sports account for 22 of 28 Paralympic sports, with the most frequently studied being wheelchair basketball, rugby, tennis, athletics, swimming, and soccer. Injuries vary by sport because of differences in contact level, limbs utilized, and athlete impairments. Equipment changes and technological advances, especially within wheelchair and amputee sports, have increased the level of competition and reduced injury rates. Fortunately, the majority of injuries across adaptive sports are minor and do not result in significant time off from sport. Still, even minor injuries can negatively impact these athletes' mobility and activities of daily living compared to the nondisabled population.
+AB As adaptive sports grow in popularity, it is increasingly important to understand the injuries for which their athletes are at risk. 
+This population is challenging to study given its small size and diversity of its participants; accordingly, research is mostly low quality 
+because of limited sample sizes and study durations. Summer adaptive sports account for 22 of 28 Paralympic sports, with the most frequently 
+studied being wheelchair basketball, rugby, tennis, athletics, swimming, and soccer. Injuries vary by sport because of differences in contact 
+level, limbs utilized, and athlete impairments. Equipment changes and technological advances, especially within wheelchair and amputee sports, 
+have increased the level of competition and reduced injury rates. Fortunately, the majority of injuries across adaptive sports are minor and do 
+not result in significant time off from sport. Still, even minor injuries can negatively impact these athletes' mobility and activities of daily living compared to the nondisabled population.
 SN 1062-8592
 EI 1538-1951
 PD JUN
@@ -4307,7 +4358,9 @@ CT International Conference on Machine Intelligence and Digital
    Applications (MIDA)
 CY MAY 30-31, 2024
 CL Ningbo, PEOPLES R CHINA
-AB In response to the problems of low recognition accuracy, slow recognition speed, and high operating costs in traditional early childhood sports action recognition technology, this article can use Kinect to study the early childhood action recognition model, which can provide strong support for the analysis and recognition of early childhood sports actions. Kinect can be used to obtain sports action data for young children, and after a series of data collection and processing, action features can be extracted. In terms of action recognition algorithm design, a model is constructed based on dynamic time warping algorithm, which can be trained through a large amount of data to improve the accuracy of recognizing young children's actions. The experimental results show that by extracting 7 types of motion, the accuracy of the action recognition model constructed in this paper for these 7 types of motion recognition is above 95.43%, with an average of 97.08%. This article uses Kinect to study young children's physical movements, which can effectively improve the accuracy of action recognition, reduce recognition costs, and improve recognition speed, bringing more innovation and breakthroughs to early childhood physical education.
+AB In response to the problems of low recognition accuracy, slow recognition speed, and high operating costs in traditional early childhood sports action recognition technology, 
+this article can use Kinect to study the early childhood action recognition model, which can provide strong support for the analysis and recognition of early childhood sports actions. 
+Kinect can be used to obtain sports action data for young children, and after a series of data collection and processing, action features can be extracted. In terms of action recognition algorithm design, a model is constructed based on dynamic time warping algorithm, which can be trained through a large amount of data to improve the accuracy of recognizing young children's actions. The experimental results show that by extracting 7 types of motion, the accuracy of the action recognition model constructed in this paper for these 7 types of motion recognition is above 95.43%, with an average of 97.08%. This article uses Kinect to study young children's physical movements, which can effectively improve the accuracy of action recognition, reduce recognition costs, and improve recognition speed, bringing more innovation and breakthroughs to early childhood physical education.
 BN 979-8-4007-1814-4
 PY 2024
 BP 790
@@ -4654,7 +4707,14 @@ AF Finn, Jonathan
 TI Timing and Imaging Evidence in Sport: Objectivity, Intervention, and the
    Limits of Technology
 SO JOURNAL OF SPORT & SOCIAL ISSUES
-AB This article analyzes timing and imaging systems used as sports decision aids (SDAs). Evidence of athletic performance in the form of timing and imaging data is the product of distinct interactions between humans, technology, and the live environment. As such, sports decisions are fallible. Yet the measurement of athletic performance is often presented as irrefutable thanks to enhanced technological precision. As this article shows, there are limits to the accuracy of timing and imaging systems as they are deployed in the physical environment, but such limits are rarely acknowledged in the public and professional discourse surrounding elite-level sport. To address this issue, the article analyses three sporting decisions: the 100 m butterfly race between Michael Phelps and Milorad Cavic at the 2008 Beijing Olympics; the third-place tie between Jeneba Tarmoh and Alysson Felix at the 2012 U.S. Olympic Trials; and the gold medal tie between skiers Tina Maze and Dominique Gisin at the 2014 Olympic games. The article examines the professional and public discourse surrounding each event as well as the regulations governing timing and imaging data in each sport to stress the situatedness and fallibility of SDAs. The article identifies limits to the accuracy of timing and imaging systems as they are deployed in the physical environment and calls on sports regulating bodies to clearly articulate the capabilities and limitations of timing and imaging systems in the production of evidence.
+AB This article analyzes timing and imaging systems used as sports decision aids (SDAs). Evidence of athletic performance in the form of timing and imaging data is the product of distinct interactions 
+between humans, technology, and the live environment. As such, sports decisions are fallible. Yet the measurement of athletic performance is often presented as irrefutable thanks to enhanced technological 
+precision. As this article shows, there are limits to the accuracy of timing and imaging systems as they are deployed in the physical environment, but such limits are rarely acknowledged in the 
+public and professional discourse surrounding elite-level sport. To address this issue, the article analyses three sporting decisions: the 100 m butterfly race between Michael Phelps and 
+Milorad Cavic at the 2008 Beijing Olympics; the third-place tie between Jeneba Tarmoh and Alysson Felix at the 2012 U.S. Olympic Trials; and the gold medal tie between skiers Tina Maze 
+and Dominique Gisin at the 2014 Olympic games. The article examines the professional and public discourse surrounding each event as well as the regulations governing timing and imaging 
+data in each sport to stress the situatedness and fallibility of SDAs. The article identifies limits to the accuracy of timing and imaging systems as they are deployed in the physical 
+environment and calls on sports regulating bodies to clearly articulate the capabilities and limitations of timing and imaging systems in the production of evidence.
 OI Finn, Jonathan/0000-0001-9196-9420
 SN 0193-7235
 EI 1552-7638
@@ -4900,7 +4960,17 @@ AF Sinden, Jane Lee
 TI The sociology of emotion in elite sport: Examining the role of
    normalization and technologies
 SO INTERNATIONAL REVIEW FOR THE SOCIOLOGY OF SPORT
-AB Recent research has examined the role of negative emotion norms and elite athletes' decisions to continue to train in sport when they are not physically healthy enough to do so. According to Lee Sinden ((2010) The normalization of emotion and the disregard of health problems in elite amateur sport. Journal of Clinical Sport Psychology 4: 241-256; (2012) The elite sport and Christianity debate: Shifting focus from normative values to the conscious disregard for health. The Journal of Religion and Health), athletes are persuaded to accept negative perceptions of emotions through a process called "normalization of emotion". The author draws on Foucault ((1977) Discipline and Punish: The Birth of the Prison. New York: Vintage Books) and Shogan ((1999) The Making of High-Performance Athletes: Discipline, Diversity, and Ethics. Toronto, ON: University of Toronto Press), to show how normalization works through an athlete's emotions using methods of normalizing, including hierarchical observation, normalizing judgment, and the examination (Lee Sinden, 2010, 2012). The author discusses how negative perceptions of emotion, described as "technologies of emotion" (Lee Sinden, 2010, 2012), are a collection of historical myths that continue to work in elite sport to homogenize athletes' outward emotional expressions. The consequence of normalization of emotion is the disassociation of athletes with their thoughts and feelings, and the potential subsequent suppression of concerns, such as training intensities and health. The following paper explores the theories of "normalization of emotion" and "technologies of emotion" in more detail. Through understanding how negative perceptions of emotions are socialized in sport, and the consequences of socializing emotions in this way, researchers and sport advocates may realize the need for a paradigm shift in the way elite sport understands and celebrates athletes' diverse emotionalities.
+AB Recent research has examined the role of negative emotion norms and elite athletes' decisions to continue to train in sport when they are not physically healthy enough to do so. 
+According to Lee Sinden ((2010) The normalization of emotion and the disregard of health problems in elite amateur sport. Journal of Clinical Sport Psychology 4: 241-256; (2012) 
+The elite sport and Christianity debate: Shifting focus from normative values to the conscious disregard for health. The Journal of Religion and Health), athletes are persuaded to 
+accept negative perceptions of emotions through a process called "normalization of emotion". The author draws on Foucault ((1977) Discipline and Punish: The Birth of the Prison. 
+New York: Vintage Books) and Shogan ((1999) The Making of High-Performance Athletes: Discipline, Diversity, and Ethics. Toronto, ON: University of Toronto Press), to show how normalization 
+works through an athlete's emotions using methods of normalizing, including hierarchical observation, normalizing judgment, and the examination (Lee Sinden, 2010, 2012). 
+The author discusses how negative perceptions of emotion, described as "technologies of emotion" (Lee Sinden, 2010, 2012), are a collection of historical myths that continue 
+to work in elite sport to homogenize athletes' outward emotional expressions. The consequence of normalization of emotion is the disassociation of athletes with their thoughts 
+and feelings, and the potential subsequent suppression of concerns, such as training intensities and health. The following paper explores the theories of "normalization of 
+emotion" and "technologies of emotion" in more detail. Through understanding how negative perceptions of emotions are socialized in sport, and the consequences of socializing 
+emotions in this way, researchers and sport advocates may realize the need for a paradigm shift in the way elite sport understands and celebrates athletes' diverse emotionalities.
 SN 1012-6902
 EI 1461-7218
 PD OCT
@@ -5250,7 +5320,16 @@ AF Lima, Giscard
 TI Anti-doping and other sport integrity challenges during the COVID-19
    pandemic
 SO JOURNAL OF SPORTS MEDICINE AND PHYSICAL FITNESS
-AB The coronavirus disease (COVID-19) pandemic has had an unprecedent impact on the world of sport and society at large. Many of the challenges with respect to integrity previously facing competitive sport have been accentuated further during the pandemic. Threats to the integrity of sporting competition include traditional doping, issues of technological fairness, and integration of transgender and intersex athletes in elite sport. The enforced lull in competitive sport provides an unprecedented opportunity for stakeholders in sport to focus on unresolved integrity issues and develop and implement long-lasting solutions. There needs to be a concerted effort to focus on the many technological innovations accelerated by and perfected during COVID-19 that have enabled us to work from home, such as teaching students on-line, applications for medical advice, prescriptions and referrals, and treating patients in hospitals/care homes via video links and use these developments and innovations to enhance sport integrity and anti-doping procedures. Positive sports integrity actions will require a considered application of all such technology, as well as the inclusion of "omics" technology, big data, bioinformatics and machine learning/artificial intelligence approaches to modernize sport. Applications include protecting the health of athletes, considered non-discriminative integration of athletes into elite sport, intelligent remote testing to improve the frequency of anti-doping tests, detection windows, and the potential combination with omics technology to improve the tests' sensitivity and specificity in order to protect clean athletes and deter doping practices.
+AB The coronavirus disease (COVID-19) pandemic has had an unprecedent impact on the world of sport and society at large. Many of the challenges with respect to integrity previously facing 
+competitive sport have been accentuated further during the pandemic. Threats to the integrity of sporting competition include traditional doping, issues of technological fairness, and 
+integration of transgender and intersex athletes in elite sport. The enforced lull in competitive sport provides an unprecedented opportunity for stakeholders in sport to focus on 
+unresolved integrity issues and develop and implement long-lasting solutions. There needs to be a concerted effort to focus on the many technological innovations accelerated by and 
+perfected during COVID-19 that have enabled us to work from home, such as teaching students on-line, applications for medical advice, prescriptions and referrals, and treating 
+patients in hospitals/care homes via video links and use these developments and innovations to enhance sport integrity and anti-doping procedures. Positive sports integrity 
+actions will require a considered application of all such technology, as well as the inclusion of "omics" technology, big data, bioinformatics and machine learning/artificial 
+intelligence approaches to modernize sport. Applications include protecting the health of athletes, considered non-discriminative integration of athletes into elite sport, 
+intelligent remote testing to improve the frequency of anti-doping tests, detection windows, and the potential combination with omics technology to improve the tests' 
+sensitivity and specificity in order to protect clean athletes and deter doping practices.
 RI Lima, Giscard/L-4859-2018; Grivas, Gerasimos/AAG-8825-2019;
    Kolliari-Turner, Alexander/W-4166-2017; Muniz-Pardos,
    Borja/ABE-4303-2021; Guppy, Fergus/N-5797-2017; Yan, Xu/T-1427-2019;
@@ -5692,8 +5771,16 @@ CT 8th International Conference on Advances in Computer Entertainment
    Technology (ACE)
 CY NOV 08-11, 2011
 CL Lisbon, PORTUGAL
-SP ACM, ACM SIGCHI, Univ Nova Lisboa, Fac Ciencias & Tecnologia, Univ Nova Lisboa, YDREAMS, Ordem Engenheiros, Centro Informatica & Tecnologias Informacao, Dept Informatica, Ministerio Ciencia, Tecnologia & Ensino Super, Fundacao Ciencia & Tecnologia, Microsoft, SPC Videojogos, Camara Municipal Lisboa, Turismo Lisboa
-AB The paper introduces a novel pervasive computing based training concept aimed at elite sports. The concept goes beyond interactive sports equipments that are either individual or multiuser with a common display requiring participant's focus. These types of equipments are unable to support the kinesthetic empathic elements inherently present within open sports. To put focus on collective training, we draw inspiration from Kinesthetic Empathy Interaction in designing the collective training equipment, TacTowers. The TacTowers prototype is aimed at supporting athletes, particularly team handball players, in honing their psychomotor skills, in particular anticipation and decision making skills, in the one-on-one confrontation. TacTowers is a sensor-actuator based system, with LED lights and no screen-based display. It is placed between the players in order to reintroduce the kinesthetic empathic element in the interaction, specific to the sport. We present and discuss results of tests with two elite handball teams. We see prospects for applying the concept for entertaining movement-stimulating games at schools or leisure sports environments.
+SP ACM, ACM SIGCHI, Univ Nova Lisboa, Fac Ciencias & Tecnologia, Univ Nova Lisboa, YDREAMS, Ordem Engenheiros, Centro Informatica & Tecnologias Informacao, Dept Informatica, Ministerio Ciencia, 
+Tecnologia & Ensino Super, Fundacao Ciencia & Tecnologia, Microsoft, SPC Videojogos, Camara Municipal Lisboa, Turismo Lisboa
+AB The paper introduces a novel pervasive computing based training concept aimed at elite sports. The concept goes beyond interactive 
+sports equipments that are either individual or multiuser with a common display requiring participant's focus. These types of equipments 
+are unable to support the kinesthetic empathic elements inherently present within open sports. To put focus on collective training, we draw 
+inspiration from Kinesthetic Empathy Interaction in designing the collective training equipment, TacTowers. The TacTowers prototype is aimed 
+at supporting athletes, particularly team handball players, in honing their psychomotor skills, in particular anticipation and decision making 
+skills, in the one-on-one confrontation. TacTowers is a sensor-actuator based system, with LED lights and no screen-based display. 
+It is placed between the players in order to reintroduce the kinesthetic empathic element in the interaction, specific to the sport. We present and discuss results 
+of tests with two elite handball teams. We see prospects for applying the concept for entertaining movement-stimulating games at schools or leisure sports environments.
 BN 978-1-4503-0827-4
 PY 2011
 UT WOS:000395786600013
@@ -6062,7 +6149,13 @@ CT International Conference of Information Science and Management
    Engineering (ISME)
 CY 2013
 CL Wuhan, PEOPLES R CHINA
-AB The technology of virtual reality has been widely used in various fields and it is been playing an important role in recent years. It possesses characteristics such as high immersion, dynamic interactivity, and digitization of multidimensional information, which are exactly the needs for the combination of modern sports development and technology advancement. Along with the recognition and investment of countries all over the world for sports development, virtual reality technology has been frequently applied in sports event broadcasting, theoretically digital physical training, and physical education. The introduction of virtual reality technology into sports will be conducive to the scientific training of competitive sports and the study on digitization of technology theory, and in the meantime benefit the rapid development of modern sports.
+AB The technology of virtual reality has been widely used in various fields and it is been playing an important role in recent years. 
+It possesses characteristics such as high immersion, dynamic interactivity, and digitization of multidimensional information, 
+which are exactly the needs for the combination of modern sports development and technology advancement. 
+Along with the recognition and investment of countries all over the world for sports development, virtual 
+reality technology has been frequently applied in sports event broadcasting, theoretically digital physical 
+training, and physical education. The introduction of virtual reality technology into sports will be conducive 
+to the scientific training of competitive sports and the study on digitization of technology theory, and in the meantime benefit the rapid development of modern sports.
 SN 1746-4463
 BN 978-1-84564-829-9; 978-1-84564-828-2
 PY 2014
@@ -7275,9 +7368,15 @@ CT 6th ACM International Workshop on Multimedia Content Analysis in Sports
 CY OCT 29, 2023
 CL Ottawa, CANADA
 SP Assoc Comp Machinery, ACM SIGMM
-AB Advanced data collection technologies, computational tools, and sophisticated algorithms have a revolutionary impact on sports analytics on various aspects of sports, from athletes performance to fan engagement. Computer Vision (CV) and Deep Learning (DL) technologies play a crucial role in predicting players and game states from videos, but their effectiveness depends on the quantity and quality of training data, especially in sports with unique dynamics and camera angles. Each sport comes with its own set of challenges.
-   This paper introduces DeepSportradar-v2, a multi-sport suite of CV tasks that address the need for high-quality datasets for different sports. Supporting multi-sport allows academic researchers to better understand the dynamics of each sport and their specific challenges. In this paper, we first report the results from the 2022 competition, and provide all resources to replicate each result. Then, we present a newly released Cricket dataset and task, given the global popularity and relevance of this sport for the automated analysis and video understanding.
-   Similarly to the first edition, a competition has been organized as part of the MMSports(1) workshop, where participants are invited to develop state-of-the-art methods for solving the proposed tasks using the publicly available datasets, development kits, and baselines.
+AB Advanced data collection technologies, computational tools, and sophisticated algorithms have a revolutionary impact on sports analytics on various aspects of sports, 
+from athletes performance to fan engagement. Computer Vision (CV) and Deep Learning (DL) technologies play a crucial role in predicting players and game states from videos, 
+but their effectiveness depends on the quantity and quality of training data, especially in sports with unique dynamics and camera angles. Each sport comes with its own set of challenges.
+   This paper introduces DeepSportradar-v2, a multi-sport suite of CV tasks that address the need for high-quality datasets for different sports. Supporting multi-sport allows 
+academic researchers to better understand the dynamics of each sport and their specific challenges. In this paper, we first report the results from the 2022 competition, and provide 
+all resources to replicate each result. Then, we present a newly released Cricket dataset and task, given the global popularity and relevance of this sport for the automated analysis 
+and video understanding.
+   Similarly to the first edition, a competition has been organized as part of the MMSports(1) workshop, where participants are invited to develop state-of-the-art methods for 
+solving the proposed tasks using the publicly available datasets, development kits, and baselines.
 RI Zambrano, Davide/AGR-6832-2022
 OI Somers, Vladimir/0000-0001-5787-4276; DE, Jaydeep/0009-0004-7706-4480
 BN 979-8-4007-0269-3
@@ -7534,7 +7633,13 @@ AF Wang, Zhigang
    Guo, Kai
 TI Consumer Acceptance of Sports Wearables: The Role of Products Attributes
 SO SAGE OPEN
-AB Based on the technology acceptance model (TAM), this paper discusses how the functional attributes and design characteristics of sports wearable devices affect users' attitude and behavior. In order to estimate the relationship between variables, structural equation model (SEM) was used to analyze the data from questionnaire. By analyzing the relationship among data analysis, real-time monitoring, appearance design, simple operation, perceived usefulness, perceived ease of use, use attitude, and use behavior, it is found that data analysis and real-time monitoring has a significant impact on the perceived usefulness of sports wearable devices. The simple operation and appearance design have a significant impact on the perceived ease of use of sports wearable devices. The perceived usefulness and perceived ease of use of sports wearable devices further affect users' attitude and behavior. The result means all study hypotheses were accepted. Therefore, providing perfect data analysis function, developing accurate real-time monitoring function, introducing friendly appearance design, and simplifying product operation mode can improve the use value and operation convenience of sports wearable devices and enhance the acceptance of users.
+AB Based on the technology acceptance model (TAM), this paper discusses how the functional attributes and design characteristics of sports wearable devices affect users' attitude and behavior. 
+In order to estimate the relationship between variables, structural equation model (SEM) was used to analyze the data from questionnaire. By analyzing the relationship among data analysis, 
+real-time monitoring, appearance design, simple operation, perceived usefulness, perceived ease of use, use attitude, and use behavior, it is found that data analysis and real-time monitoring 
+has a significant impact on the perceived usefulness of sports wearable devices. The simple operation and appearance design have a significant impact on the perceived ease of use of sports 
+wearable devices. The perceived usefulness and perceived ease of use of sports wearable devices further affect users' attitude and behavior. The result means all study hypotheses were 
+accepted. Therefore, providing perfect data analysis function, developing accurate real-time monitoring function, introducing friendly appearance design, and simplifying product operation 
+mode can improve the use value and operation convenience of sports wearable devices and enhance the acceptance of users.
 RI Wang, Chao/JAD-0928-2023; Guo, GuoKai/IIO-7968-2023
 OI Liu, Xintao/0000-0002-8359-5665; Guo, Kai/0000-0002-5226-2067
 SN 2158-2440
@@ -8735,7 +8840,12 @@ AF Li, Guangjing
 TI Automatic detection technology of sports athletes based on image
    recognition technology
 SO EURASIP JOURNAL ON IMAGE AND VIDEO PROCESSING
-AB In order to improve the motion recognition effect of sports athletes based on image recognition technology, this study takes the current common diving athletes as the research material in the actual research, and combines the research status of image recognition to study the athlete's motion recognition from image processing. Simultaneously, in this study, the gradient segmentation method is used to segment the image, the research object is segmented from the video image, the traditional image grayscale method is improved, and the image segmentation algorithm adapted to the diving motion is obtained. On this basis, this study combines Gaussian mixture background modeling and background subtraction to achieve the detection and extraction of target human body regions, and uses morphological operators to deal with noise and void phenomena in foreground images. The example analysis shows that the proposed method has certain practicality and can provide theoretical reference for subsequent related research.
+AB In order to improve the motion recognition effect of sports athletes based on image recognition technology, this study takes the current common diving athletes as the research 
+material in the actual research, and combines the research status of image recognition to study the athlete's motion recognition from image processing. Simultaneously, in this study, 
+the gradient segmentation method is used to segment the image, the research object is segmented from the video image, the traditional image grayscale method is improved, and the image 
+segmentation algorithm adapted to the diving motion is obtained. On this basis, this study combines Gaussian mixture background modeling and background subtraction to achieve the 
+detection and extraction of target human body regions, and uses morphological operators to deal with noise and void phenomena in foreground images. The example analysis shows that 
+the proposed method has certain practicality and can provide theoretical reference for subsequent related research.
 SN 1687-5176
 EI 1687-5281
 PD JAN 18
@@ -13468,7 +13578,20 @@ TI Safeguarding Athletes Against Head Injuries Through Advances in
    Technology: A Scoping Review of the Uses of Machine Learning in the
    Management of Sports-Related Concussion
 SO FRONTIERS IN SPORTS AND ACTIVE LIVING
-AB Sports injury prevention is an important part of the athlete welfare and safeguarding research field. In sports injury prevention, sport-related concussion (SRC) has proved to be one of the most difficult and complex injuries to manage in terms of prevention, diagnosis, classification, treatment and rehabilitation. SRC can cause long-term health issues and is a commonly reported injury in both adult and youth athletes around the world. Despite increased knowledge of the prevalence of SRC, very few tools are available for diagnosing SRC in athletic settings. Recent technological innovations have resulted in different machine learning and deep learning methodologies being tested to improve the management of this complex sports injury. The purpose of this article is to summarize and map the existing research literature on the use of machine learning in the management of SRC, ascertain where there are gaps in the existing research and identify recommendations for future research. This is explored through a scoping review. A systematic search in the three electronic databases SPORTDiscus, PubMed and Scopus identified an initial 522 studies, of which 24 were included in the final review, the majority of which focused on machine learning for the prediction and prevention of SRC (N = 10), or machine learning for the diagnosis and classification of SRC (N = 11). Only 3 studies explored machine learning approaches for the treatment and rehabilitation of SRC. A main finding is that current research highlights promising practical uses (e.g., more accurate and rapid injury assessment or return-to-sport participation criteria) of machine learning in the management of SRC. The review also revealed a narrow research focus in the existing literature. As current research is primarily conducted on male adolescents or adults from team sports in North America there is an urgent need to include wider demographics in more diverse samples and sports contexts in the machine learning algorithms. If research datasets continue to be based on narrow samples of athletes, the development of any new diagnostic and predictive tools for SRC emerging from this research will be at risk. Today, these risks appear to mainly affect the health and safety of female athletes.
+AB Sports injury prevention is an important part of the athlete welfare and safeguarding research field. In sports injury prevention, sport-related concussion (SRC) 
+has proved to be one of the most difficult and complex injuries to manage in terms of prevention, diagnosis, classification, treatment and rehabilitation. 
+SRC can cause long-term health issues and is a commonly reported injury in both adult and youth athletes around the world. Despite increased knowledge of the 
+prevalence of SRC, very few tools are available for diagnosing SRC in athletic settings. Recent technological innovations have resulted in different machine 
+learning and deep learning methodologies being tested to improve the management of this complex sports injury. The purpose of this article is to summarize and 
+map the existing research literature on the use of machine learning in the management of SRC, ascertain where there are gaps in the existing research and identify 
+recommendations for future research. This is explored through a scoping review. A systematic search in the three electronic databases SPORTDiscus, PubMed and 
+Scopus identified an initial 522 studies, of which 24 were included in the final review, the majority of which focused on machine learning for the prediction and 
+prevention of SRC (N = 10), or machine learning for the diagnosis and classification of SRC (N = 11). Only 3 studies explored machine learning approaches for the 
+treatment and rehabilitation of SRC. A main finding is that current research highlights promising practical uses (e.g., more accurate and rapid injury assessment 
+or return-to-sport participation criteria) of machine learning in the management of SRC. The review also revealed a narrow research focus in the existing literature. 
+As current research is primarily conducted on male adolescents or adults from team sports in North America there is an urgent need to include wider demographics in 
+more diverse samples and sports contexts in the machine learning algorithms. If research datasets continue to be based on narrow samples of athletes, the development 
+of any new diagnostic and predictive tools for SRC emerging from this research will be at risk. Today, these risks appear to mainly affect the health and safety of female athletes.
 OI Rosten, Stian/0000-0002-8022-0745
 EI 2624-9367
 PD APR 20
@@ -17338,7 +17461,12 @@ CT Consensus Meeting on Football at High Altitude
 CY OCT 25-27, 2007
 CL Zurich, SWITZERLAND
 SP FIFA, F MARC
-AB With the use of technologically constructed hypoxic environments (TCHE) in soccer as our case, we propose four check points from which to evaluate new performance-enhancing technologies in sport. These are (I) Is the technology beneficial, (II) Is it safe, (III) Can fairness be assured, and (IV) Is the technology in line with the spirit of or rationale for sport? The use of TCHE is ambiguous. On the one hand, in situations with grave inequalities between teams due to lack of acclimatization of one team, TCHE can be an efficient means to even the playing field and out of concern for athlete welfare and health. On the other hand, if used as a pure performance-enhancing means to enhance the oxygen-carrying capacity of the blood independent of altitude, it belongs to a category of expert-assisted performance enhancement that may challenge athletic autonomy and the responsibility for one's own performance and, hence, the spirit of sport.
+AB With the use of technologically constructed hypoxic environments (TCHE) in soccer as our case, we propose four check points from which to evaluate new 
+performance-enhancing technologies in sport. These are (I) Is the technology beneficial, (II) Is it safe, (III) Can fairness be assured, and (IV) Is the 
+technology in line with the spirit of or rationale for sport? The use of TCHE is ambiguous. On the one hand, in situations with grave inequalities between 
+teams due to lack of acclimatization of one team, TCHE can be an efficient means to even the playing field and out of concern for athlete welfare and health. 
+On the other hand, if used as a pure performance-enhancing means to enhance the oxygen-carrying capacity of the blood independent of altitude, it belongs 
+to a category of expert-assisted performance enhancement that may challenge athletic autonomy and the responsibility for one's own performance and, hence, the spirit of sport.
 OI Loland, Sigmund/0000-0003-1206-4098
 SN 0905-7188
 PD AUG

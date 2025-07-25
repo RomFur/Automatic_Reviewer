@@ -46,8 +46,8 @@ If none clearly apply, return the string "None".
 • **technology** → choose **zero or more** items from **TECH_CHOICES**  
 ― comma-separated, **only include a term if it is explicitly found** in
 either the article title or abstract (case-insensitive).  
-If no technology term is present, you may add your own relevant technology term(s),  
-or return "None" if no suitable term exists.
+If no technology term is present, return "None" if no suitable term exists,
+do not add your own technology terms.
 
 TECH_CHOICES  = {tech_list}
 
@@ -61,13 +61,13 @@ PICO_PROMPT = """
 Return **JSON only** with the keys **"population"** and **"outcome"**.
 
 • **population** → choose the single best match from **POP_CHOICES**.  
-If no listed population fits, you may add your own relevant population term(s),  
-or return "None" if no suitable term exists.
+If no listed population fits, return "None" if no suitable term exists,
+do not add your own population term.
 
 • **outcome** → list **one or more** comma-separated items drawn **only** from
 **OUT_CHOICES** that clearly appear in the abstract or title.  
-If no listed outcome fits, you may add your own relevant outcome term(s),  
-or return "None" if no suitable term exists.
+If no listed outcome fits, return "None" if no suitable term exists,
+do not add your own outcome terms.
 
 POP_CHOICES = {pop_list}
 OUT_CHOICES = {out_list}
