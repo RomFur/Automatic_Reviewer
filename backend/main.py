@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, Header, HTTPException
+from fastapi import FastAPI, File, UploadFile, Header
 from fastapi.responses import FileResponse
 import os
 import json
