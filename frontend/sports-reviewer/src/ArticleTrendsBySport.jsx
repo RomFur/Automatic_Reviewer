@@ -25,20 +25,22 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
         return res.json();
       })
       .then((json) => {
+        const data = json.articles || [];
+
         const trendDataMap = {};
         const articlesByYearSport = {};
 
-        json.forEach(({ year, sport, ut, title }) => {
-          if (!year || !sport) return;
+        data.forEach(({ year, sport, ut, title }) => {
+          if (!year || !sport || sport === 'None') return;
 
           const yearStr = String(year).trim();
           const sportStr = sport.trim();
 
-          if (sportStr === 'None') return;
-
+          // Count for chart
           if (!trendDataMap[yearStr]) trendDataMap[yearStr] = {};
           trendDataMap[yearStr][sportStr] = (trendDataMap[yearStr][sportStr] || 0) + 1;
 
+          // Group articles by year and sport
           if (!articlesByYearSport[yearStr]) articlesByYearSport[yearStr] = {};
           if (!articlesByYearSport[yearStr][sportStr]) articlesByYearSport[yearStr][sportStr] = [];
           articlesByYearSport[yearStr][sportStr].push({ ut, title });
@@ -95,7 +97,7 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
 
   return (
     <div className="w-full max-w-6xl h-[600px] bg-white p-6 rounded shadow-md flex overflow-hidden">
-      {/* Chart area */}
+      {/* Chart Area */}
       <div
         className="transition-all duration-500 ease-in-out"
         style={{
@@ -106,19 +108,16 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Article Trends by Sport Over Years</h2>
-
           <select
             value={selectedSport}
             onChange={(e) => {
               setSelectedSport(e.target.value);
-              setSelectedYear(null); // close sidebar when sport changes
+              setSelectedYear(null);
             }}
             className="border border-gray-300 rounded px-3 py-1"
           >
             {availableSports.map((sport) => (
-              <option key={sport} value={sport}>
-                {sport}
-              </option>
+              <option key={sport} value={sport}>{sport}</option>
             ))}
           </select>
         </div>
@@ -149,18 +148,13 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
 
       {/* Sidebar */}
       {selectedYear && (
-        <div
-          className="w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto"
-          style={{ minWidth: 0 }}
-        >
+        <div className="w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto">
           <button
             className="mb-4 text-gray-600 hover:text-gray-900"
             onClick={() => setSelectedYear(null)}
-            aria-label="Close articles sidebar"
           >
             &larr; Close
           </button>
-
           <h3 className="text-xl font-semibold mb-2">
             Articles for {selectedSport} in {selectedYear}
           </h3>
@@ -189,7 +183,6 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
 }
 
 export default ArticleTrendsBySport;
-
 
 
 

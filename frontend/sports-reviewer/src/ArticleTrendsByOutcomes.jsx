@@ -25,10 +25,12 @@ function ArticleTrendsByOutcomes({ credentials, onLogout }) {
         return res.json();
       })
       .then((json) => {
+        const data = json.articles || [];
+
         const trendDataMap = {};
         const articlesByYearOutcome = {};
 
-        json.forEach(({ year, outcome, ut, title }) => {
+        data.forEach(({ year, outcome, ut, title }) => {
           if (!year || !outcome) return;
 
           const yearStr = String(year).trim();
@@ -43,7 +45,8 @@ function ArticleTrendsByOutcomes({ credentials, onLogout }) {
           if (!articlesByYearOutcome[yearStr]) articlesByYearOutcome[yearStr] = {};
 
           outcomesList.forEach((singleOutcome) => {
-            trendDataMap[yearStr][singleOutcome] = (trendDataMap[yearStr][singleOutcome] || 0) + 1;
+            trendDataMap[yearStr][singleOutcome] =
+              (trendDataMap[yearStr][singleOutcome] || 0) + 1;
 
             if (!articlesByYearOutcome[yearStr][singleOutcome]) {
               articlesByYearOutcome[yearStr][singleOutcome] = [];
@@ -164,7 +167,6 @@ function ArticleTrendsByOutcomes({ credentials, onLogout }) {
       {selectedYear && (
         <div
           className="w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto"
-          style={{ minWidth: 0 }}
         >
           <button
             className="mb-4 text-gray-600 hover:text-gray-900"

@@ -25,10 +25,12 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
         return res.json();
       })
       .then((json) => {
+        const data = json.articles || [];
+
         const techDataMap = {};
         const articlesByYearTech = {};
 
-        json.forEach(({ year, technology, ut, title }) => {
+        data.forEach(({ year, technology, ut, title }) => {
           if (!year || !technology) return;
 
           const yearStr = String(year).trim();
@@ -160,7 +162,6 @@ function ArticleTrendsByTechnology({ credentials, onLogout }) {
       {selectedYear && (
         <div
           className="w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto"
-          style={{ minWidth: 0 }}
         >
           <button
             className="mb-4 text-gray-600 hover:text-gray-900"

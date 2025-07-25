@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Treemap, Tooltip, ResponsiveContainer } from 'recharts';
 
-function TreemapPage({ credentials }) {
+function TechTreemapPage({ credentials }) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState('');
   const [choices, setChoices] = useState(null);
   const [filters, setFilters] = useState({
     startYear: '',
     endYear: '',
-    technology: '',
     population: '',
     outcome: '',
+    sport: '',
   });
 
-  const [selectedSport, setSelectedSport] = useState(null);
+  const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
+
+  // Utility to extract individual tech terms cleanly
+  const extractTechnologies = (techString) => {
+    return techString
+      .replace(/[\[\]"]+/g, '') // remove brackets and quotes
+      .split(',')
+      .map((t) => t.trim())
+      .filter((t) => t); // remove empty
+  };
 
   useEffect(() => {
     const headers = {
@@ -32,19 +41,22 @@ function TreemapPage({ credentials }) {
       .then((json) => {
         setAllArticles(json.articles);
 
-        const sportCount = {};
+        const techCount = {};
         json.articles.forEach((item) => {
-          const sport = item.sport;
-          if (sport && sport !== 'None') {
-            sportCount[sport] = (sportCount[sport] || 0) + 1;
+          const tech = item.technology;
+          if (tech && tech !== 'None') {
+            extractTechnologies(tech).forEach((t) => {
+              techCount[t] = (techCount[t] || 0) + 1;
+            });
           }
         });
 
-        const formatted = Object.entries(sportCount).map(([name, size]) => ({
-          name,
-          size,
-        }));
-
+        const formatted = Object.entries(techCount)
+            .filter(([name]) => name.toLowerCase() !== 'none')
+            .map(([name, size]) => ({
+                name,
+                size,
+            }));
         setChartData(formatted);
         setChoices(json.filters);
       })
@@ -62,9 +74,9 @@ function TreemapPage({ credentials }) {
     const params = new URLSearchParams();
     if (filters.startYear) params.append('start_year', filters.startYear);
     if (filters.endYear) params.append('end_year', filters.endYear);
-    if (filters.technology) params.append('technology', filters.technology);
     if (filters.population) params.append('population', filters.population);
     if (filters.outcome) params.append('outcome', filters.outcome);
+    if (filters.sport) params.append('sport', filters.sport);
 
     fetch(`http://localhost:8000/articles/filter/?${params.toString()}`, { headers })
       .then(async (res) => {
@@ -72,23 +84,26 @@ function TreemapPage({ credentials }) {
         return res.json();
       })
       .then((filteredArticles) => {
-        setAllArticles(filteredArticles); // Update full article list
+        setAllArticles(filteredArticles);
 
-        const sportCount = {};
+        const techCount = {};
         filteredArticles.forEach((item) => {
-          const sport = item.sport;
-          if (sport && sport !== 'None') {
-            sportCount[sport] = (sportCount[sport] || 0) + 1;
+          const tech = item.technology;
+          if (tech && tech !== 'None') {
+            extractTechnologies(tech).forEach((t) => {
+              techCount[t] = (techCount[t] || 0) + 1;
+            });
           }
         });
 
-        const formatted = Object.entries(sportCount).map(([name, size]) => ({
-          name,
-          size,
-        }));
-
+        const formatted = Object.entries(techCount)
+            .filter(([name]) => name.toLowerCase() !== 'none')
+            .map(([name, size]) => ({
+                name,
+                size,
+            }));
         setChartData(formatted);
-        setSelectedSport(null); // Reset sidebar if filters are reapplied
+        setSelectedTechnology(null);
       })
       .catch(() => setError('database connection error'));
   };
@@ -111,14 +126,17 @@ function TreemapPage({ credentials }) {
     return <p>Loading articles...</p>;
   }
 
-  const selectedArticles = selectedSport
-    ? allArticles.filter((a) => a.sport === selectedSport)
+  const selectedArticles = selectedTechnology
+    ? allArticles.filter((a) =>
+        a.technology &&
+        extractTechnologies(a.technology).includes(selectedTechnology)
+      )
     : [];
 
   return (
     <div className="w-full max-w-6xl mx-auto h-[900px] bg-white p-6 rounded shadow-md relative">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Sports Treemap</h2>
+        <h2 className="text-2xl font-bold">Technology Treemap</h2>
       </div>
 
       {/* Filter controls */}
@@ -137,16 +155,6 @@ function TreemapPage({ credentials }) {
           onChange={(e) => setFilters({ ...filters, endYear: e.target.value })}
           className="border px-2 py-1 rounded"
         />
-        <select
-          value={filters.technology}
-          onChange={(e) => setFilters({ ...filters, technology: e.target.value })}
-          className="border px-2 py-1 rounded"
-        >
-          <option value="">All Technologies</option>
-          {choices.technologies.map((tech) => (
-            <option key={tech} value={tech}>{tech}</option>
-          ))}
-        </select>
         <select
           value={filters.population}
           onChange={(e) => setFilters({ ...filters, population: e.target.value })}
@@ -167,6 +175,16 @@ function TreemapPage({ credentials }) {
             <option key={out} value={out}>{out}</option>
           ))}
         </select>
+        <select
+          value={filters.sport}
+          onChange={(e) => setFilters({ ...filters, sport: e.target.value })}
+          className="border px-2 py-1 rounded"
+        >
+          <option value="">All Sports</option>
+          {choices.sports.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
         <button
           onClick={handleFilter}
           className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
@@ -182,24 +200,24 @@ function TreemapPage({ credentials }) {
           dataKey="size"
           ratio={4 / 3}
           stroke="#fff"
-          fill="#8884d8"
-          onClick={(node) => setSelectedSport(node.name)}
+          fill="#eec144ff"
+          onClick={(node) => setSelectedTechnology(node.name)}
         >
           <Tooltip />
         </Treemap>
       </ResponsiveContainer>
 
       {/* Sidebar */}
-      {selectedSport && (
+      {selectedTechnology && (
         <div className="fixed right-0 top-0 h-full w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto shadow-lg z-50">
           <button
-            onClick={() => setSelectedSport(null)}
+            onClick={() => setSelectedTechnology(null)}
             className="mb-4 text-gray-600 hover:text-gray-900"
           >
             &larr; Back
           </button>
           <h3 className="text-xl font-semibold mb-2">
-            Articles for {selectedSport}
+            Articles for {selectedTechnology}
           </h3>
           {selectedArticles.length > 0 ? (
             <ul className="list-disc list-inside space-y-2 max-h-[85vh] overflow-y-auto">
@@ -217,7 +235,7 @@ function TreemapPage({ credentials }) {
               ))}
             </ul>
           ) : (
-            <p>No articles available for {selectedSport}.</p>
+            <p>No articles available for {selectedTechnology}.</p>
           )}
         </div>
       )}
@@ -225,4 +243,4 @@ function TreemapPage({ credentials }) {
   );
 }
 
-export default TreemapPage;
+export default TechTreemapPage;

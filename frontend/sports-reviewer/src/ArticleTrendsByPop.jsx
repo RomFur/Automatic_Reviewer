@@ -25,10 +25,12 @@ function ArticleTrendsByPop({ credentials, onLogout }) {
         return res.json();
       })
       .then((json) => {
+        const data = json.articles || [];
+
         const trendDataMap = {};
         const articlesByYearPopulation = {};
 
-        json.forEach(({ year, population, ut, title }) => {
+        data.forEach(({ year, population, ut, title }) => {
           if (!year || !population) return;
 
           const yearStr = String(year).trim();
@@ -40,7 +42,9 @@ function ArticleTrendsByPop({ credentials, onLogout }) {
           trendDataMap[yearStr][populationStr] = (trendDataMap[yearStr][populationStr] || 0) + 1;
 
           if (!articlesByYearPopulation[yearStr]) articlesByYearPopulation[yearStr] = {};
-          if (!articlesByYearPopulation[yearStr][populationStr]) articlesByYearPopulation[yearStr][populationStr] = [];
+          if (!articlesByYearPopulation[yearStr][populationStr]) {
+            articlesByYearPopulation[yearStr][populationStr] = [];
+          }
           articlesByYearPopulation[yearStr][populationStr].push({ ut, title });
         });
 
@@ -151,7 +155,6 @@ function ArticleTrendsByPop({ credentials, onLogout }) {
       {selectedYear && (
         <div
           className="w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto"
-          style={{ minWidth: 0 }}
         >
           <button
             className="mb-4 text-gray-600 hover:text-gray-900"

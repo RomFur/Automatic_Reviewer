@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Treemap, Tooltip, ResponsiveContainer } from 'recharts';
 
-function TreemapPage({ credentials }) {
+function PopTreemapPage({ credentials }) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState('');
   const [choices, setChoices] = useState(null);
@@ -9,11 +9,11 @@ function TreemapPage({ credentials }) {
     startYear: '',
     endYear: '',
     technology: '',
-    population: '',
     outcome: '',
+    sport: '',
   });
 
-  const [selectedSport, setSelectedSport] = useState(null);
+  const [selectedPopulation, setSelectedPopulation] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
 
   useEffect(() => {
@@ -32,15 +32,15 @@ function TreemapPage({ credentials }) {
       .then((json) => {
         setAllArticles(json.articles);
 
-        const sportCount = {};
+        const popCount = {};
         json.articles.forEach((item) => {
-          const sport = item.sport;
-          if (sport && sport !== 'None') {
-            sportCount[sport] = (sportCount[sport] || 0) + 1;
+          const pop = item.population;
+          if (pop && pop !== 'None') {
+            popCount[pop] = (popCount[pop] || 0) + 1;
           }
         });
 
-        const formatted = Object.entries(sportCount).map(([name, size]) => ({
+        const formatted = Object.entries(popCount).map(([name, size]) => ({
           name,
           size,
         }));
@@ -63,8 +63,8 @@ function TreemapPage({ credentials }) {
     if (filters.startYear) params.append('start_year', filters.startYear);
     if (filters.endYear) params.append('end_year', filters.endYear);
     if (filters.technology) params.append('technology', filters.technology);
-    if (filters.population) params.append('population', filters.population);
     if (filters.outcome) params.append('outcome', filters.outcome);
+    if (filters.sport) params.append('sport', filters.sport);
 
     fetch(`http://localhost:8000/articles/filter/?${params.toString()}`, { headers })
       .then(async (res) => {
@@ -72,23 +72,23 @@ function TreemapPage({ credentials }) {
         return res.json();
       })
       .then((filteredArticles) => {
-        setAllArticles(filteredArticles); // Update full article list
+        setAllArticles(filteredArticles);
 
-        const sportCount = {};
+        const popCount = {};
         filteredArticles.forEach((item) => {
-          const sport = item.sport;
-          if (sport && sport !== 'None') {
-            sportCount[sport] = (sportCount[sport] || 0) + 1;
+          const pop = item.population;
+          if (pop && pop !== 'None') {
+            popCount[pop] = (popCount[pop] || 0) + 1;
           }
         });
 
-        const formatted = Object.entries(sportCount).map(([name, size]) => ({
+        const formatted = Object.entries(popCount).map(([name, size]) => ({
           name,
           size,
         }));
 
         setChartData(formatted);
-        setSelectedSport(null); // Reset sidebar if filters are reapplied
+        setSelectedPopulation(null);
       })
       .catch(() => setError('database connection error'));
   };
@@ -111,14 +111,14 @@ function TreemapPage({ credentials }) {
     return <p>Loading articles...</p>;
   }
 
-  const selectedArticles = selectedSport
-    ? allArticles.filter((a) => a.sport === selectedSport)
+  const selectedArticles = selectedPopulation
+    ? allArticles.filter((a) => a.population === selectedPopulation)
     : [];
 
   return (
     <div className="w-full max-w-6xl mx-auto h-[900px] bg-white p-6 rounded shadow-md relative">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Sports Treemap</h2>
+        <h2 className="text-2xl font-bold">Population Treemap</h2>
       </div>
 
       {/* Filter controls */}
@@ -148,16 +148,6 @@ function TreemapPage({ credentials }) {
           ))}
         </select>
         <select
-          value={filters.population}
-          onChange={(e) => setFilters({ ...filters, population: e.target.value })}
-          className="border px-2 py-1 rounded"
-        >
-          <option value="">All Populations</option>
-          {choices.populations.map((pop) => (
-            <option key={pop} value={pop}>{pop}</option>
-          ))}
-        </select>
-        <select
           value={filters.outcome}
           onChange={(e) => setFilters({ ...filters, outcome: e.target.value })}
           className="border px-2 py-1 rounded"
@@ -165,6 +155,16 @@ function TreemapPage({ credentials }) {
           <option value="">All Outcomes</option>
           {choices.outcomes.map((out) => (
             <option key={out} value={out}>{out}</option>
+          ))}
+        </select>
+        <select
+          value={filters.sport}
+          onChange={(e) => setFilters({ ...filters, sport: e.target.value })}
+          className="border px-2 py-1 rounded"
+        >
+          <option value="">All Sports</option>
+          {choices.sports.map((s) => (
+            <option key={s} value={s}>{s}</option>
           ))}
         </select>
         <button
@@ -182,24 +182,24 @@ function TreemapPage({ credentials }) {
           dataKey="size"
           ratio={4 / 3}
           stroke="#fff"
-          fill="#8884d8"
-          onClick={(node) => setSelectedSport(node.name)}
+          fill="#82ca9d"
+          onClick={(node) => setSelectedPopulation(node.name)}
         >
           <Tooltip />
         </Treemap>
       </ResponsiveContainer>
 
       {/* Sidebar */}
-      {selectedSport && (
+      {selectedPopulation && (
         <div className="fixed right-0 top-0 h-full w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto shadow-lg z-50">
           <button
-            onClick={() => setSelectedSport(null)}
+            onClick={() => setSelectedPopulation(null)}
             className="mb-4 text-gray-600 hover:text-gray-900"
           >
             &larr; Back
           </button>
           <h3 className="text-xl font-semibold mb-2">
-            Articles for {selectedSport}
+            Articles for {selectedPopulation}
           </h3>
           {selectedArticles.length > 0 ? (
             <ul className="list-disc list-inside space-y-2 max-h-[85vh] overflow-y-auto">
@@ -217,7 +217,7 @@ function TreemapPage({ credentials }) {
               ))}
             </ul>
           ) : (
-            <p>No articles available for {selectedSport}.</p>
+            <p>No articles available for {selectedPopulation}.</p>
           )}
         </div>
       )}
@@ -225,4 +225,4 @@ function TreemapPage({ credentials }) {
   );
 }
 
-export default TreemapPage;
+export default PopTreemapPage;

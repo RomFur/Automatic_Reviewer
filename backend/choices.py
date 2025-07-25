@@ -17,12 +17,18 @@ TECH_CHOICES = [
     "Force Plates", "EMG", "Motion Capture", "Computer Vision", "Machine Learning",
     "Deep Learning", "Artificial Intelligence", "Video Analysis", "Biomechanical Modelling",
     "Virtual Reality", "Augmented Reality", "ECG", "EEG", "Thermal Imaging", "Simulation",
-    "3D Printing", "Smart Textiles", "Pressure Insoles", "Pedometer", "Eye Tracking", "Drones"
+    "3D Printing", "3D Scanning", "4D Printing", "Smart Textiles", "Pressure Insoles", 
+    "Pedometer", "Eye Tracking", "Drones", "5G", "Big Data", "Cloud Computing", "Cybersecurity",
+    "Data Mining", "Database",  "Assistive Technology", "Blockchain", "Brain-Computer Interfaces",
+    "CAD", "Digital Twins", "Edge Computing", "Internet of Things", "Metaverse", "Neural Network",
+    "Quantum Computing", "RFID", "Sensor Fusion", "Information Technology"              
 ]
 
 POP_CHOICES = [
-    "Youth", "Adolescents", "Collegiate", "Elite", "Adults", "Players", "School", "Professional",
-    "Sub-Elite", "Amateur", "Recreational", "Masters", "Female", "Male", "Para-Athletes", "Coaches", "Students"
+    "Youth", "Adolescents", "Collegiate", "Elite", "Adults", "Players", "School", "Professionals",
+    "Sub-Elite", "Amateur", "Recreational", "Masters", "Female", "Male", "Para-Athletes", "Coaches", 
+    "Students", "Children", "Elderly", "Students", "Sedentary Individuals",    
+    "Consumers", "Military Personnel", "Teachers", "Researchers and practitioners"
 ]
 
 OUT_CHOICES = [
@@ -30,7 +36,10 @@ OUT_CHOICES = [
     "Injury Risk", "Injury Severity", "Injury Prevention", "Recovery",
     "Tactical Behaviour", "Psychology", "Perception", "Decision-Making",
     "Workload", "Fatigue", "Running Economy", "Endurance", "Speed",
-    "Strength", "Power", "Accuracy", "Motivation", "Autonomic Function",
+    "Strength", "Power", "Accuracy", "Motivation", "Autonomy",
     "Leadership", "Fitness", "Strategy", "Competition", "Teaching Ability",
-    "Knowledge Level", "Precision", "Skill", "Tactics", "Concussion"
+    "Knowledge Level", "Precision", "Skill", "Tactics", "Concussion", "Anxiety",
+    "Attention", "Comfort", "Concentration", "Cognitive Flexibility", "Cognitive Skills",
+    "Detection", "Efficiency", "Emotion", "Engagement", "Enjoyment", "Flow", "Injury Management",
+    "Performance Prediction", "Reaction Time", "Stress", "VO2"
 ]
