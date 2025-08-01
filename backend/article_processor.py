@@ -110,7 +110,7 @@ async def process_articles(txt_path: str, out_csv: str):
         for title, abstract, year, ut in records
     ]
 
-    llm = Ollama(model="gemma3")
+    llm = Ollama(model="gemma3:27b")
     rows = []
 
     for title, abstract, year, ut in records:
