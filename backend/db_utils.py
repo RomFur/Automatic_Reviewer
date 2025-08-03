@@ -1,6 +1,43 @@
 import mysql.connector
 import csv
 
+def initialize_database(
+    host: str,
+    user: str,
+    password: str,
+    database: str
+) -> None:
+    """Create the database and articles table if they don't exist."""
+    # Connect without specifying a database first (to create the DB)
+    conn = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password,
+    )
+    cursor = conn.cursor()
+
+    # Create database if not exists
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {database}")
+    # Select the database
+    cursor.execute(f"USE {database}")
+
+    # Create articles table if not exists
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS articles (
+        ut VARCHAR(50) PRIMARY KEY,
+        title TEXT NOT NULL,
+        year INT,
+        sport VARCHAR(100),
+        population TEXT,
+        technology TEXT,
+        outcome TEXT
+    )
+    """)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 def insert_articles_from_csv(
     csv_file_path: str,
     host: str,
@@ -9,6 +46,8 @@ def insert_articles_from_csv(
     database: str
 ) -> None:
     """Insert or ignore rows from article_output.csv into MySQL."""
+    initialize_database(host, user, password, database)
+
     conn = mysql.connector.connect(
         host=host,
         user=user,
