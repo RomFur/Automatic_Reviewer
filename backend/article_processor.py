@@ -7,7 +7,7 @@ from langchain.llms import Ollama
 from langchain.prompts import PromptTemplate
 
 
-# ───────────── Simple WoS parser ──────────────
+# WoS parser 
 def parse_articles(raw: str) -> List[Tuple[str, str, str, str]]:
     """Return (title, abstract, year, ut) for every WoS record in the text."""
     recs = []
@@ -32,7 +32,7 @@ def parse_articles(raw: str) -> List[Tuple[str, str, str, str]]:
     return recs
 
 
-# ───────────── LLM helpers ──────────────
+# LLM helpers 
 CLASS_PROMPT = """
 Return **JSON only** with the keys **"sport"** and **"technology"**.
 
@@ -97,10 +97,10 @@ def first_json(text: str):
 def clean_ut(ut_raw: str) -> str:
     m = re.search(r"WOS:\d+", ut_raw)
     if m:
-        return m.group(0)[:19]  # ensure max 19 characters
+        return m.group(0)[:19]  
     return "Unknown"
 
-# ───────────── Pipeline ──────────────
+# Pipeline
 async def process_articles(txt_path: str, out_csv: str):
     text = Path(txt_path).read_text(encoding="utf‑8")
     records = parse_articles(text)
@@ -110,11 +110,11 @@ async def process_articles(txt_path: str, out_csv: str):
         for title, abstract, year, ut in records
     ]
 
-    llm = Ollama(model="gemma3:27b")
+    llm = Ollama(model="gemma3")
     rows = []
 
     for title, abstract, year, ut in records:
-        # 1) sport / tech --------------------------------------------------
+        # 1) sport / tech 
         prompt1 = PromptTemplate(
             template=CLASS_PROMPT,
             input_variables=["title", "year", "abstract", "sport_list", "tech_list"],
@@ -144,7 +144,7 @@ async def process_articles(txt_path: str, out_csv: str):
         if not present_techs:
             present_techs = ["None"]
 
-        # 2) population / outcome -----------------------------------------
+        # 2) population / outcome 
         prompt2 = PromptTemplate(
             template=PICO_PROMPT,
             input_variables=["title", "abstract", "pop_list", "out_list"],
@@ -181,7 +181,7 @@ async def process_articles(txt_path: str, out_csv: str):
             }
         )
 
-    # write CSV -----------------------------------------------------------
+    # write CSV 
     with open(out_csv, "w", newline="", encoding="utf‑8") as f:
         writer = csv.DictWriter(
             f,
@@ -201,5 +201,5 @@ async def process_articles(txt_path: str, out_csv: str):
             r_cp["technology"] = json.dumps(r_cp["technology"], ensure_ascii=False)
             writer.writerow(r_cp)
 
-    print(f"✅ {len(rows)} articles saved → {out_csv}")
+    print(f" {len(rows)} articles saved → {out_csv}")
     return out_csv, len(rows)

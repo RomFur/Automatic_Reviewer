@@ -67,8 +67,3 @@ if response.status_code == 200:
         print("No records found.")
 else:
     print(f"Error {response.status_code}: {response.text}")
-
-
-
-
-# 4341ecef87c8aa49aa7e18e770d75934118e2848

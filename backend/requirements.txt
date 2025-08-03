@@ -5,3 +5,4 @@ ollama
 langchain-ollama
 langchain_community
 python-multipart
+mysql-connector-python

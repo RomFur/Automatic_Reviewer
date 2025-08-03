@@ -1,5 +1,3 @@
-# choices.py
-
 SPORT_CHOICES = [
     "American Football", "Football", "Soccer", "Volleyball", "Beach Volleyball", "Tennis",
     "Paddle‑Tennis", "Table Tennis", "Basketball", "Rugby", "Badminton", "Athletics",
