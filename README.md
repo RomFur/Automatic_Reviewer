@@ -1,5 +1,6 @@
 # Setup guide
 
+
 ## 1 Setup Backend
 
 ### 1.1 Navigate to backend folder and create virtual environment:
@@ -44,10 +45,6 @@ npm install
 ### 3.1 Install MySQL (if not already installed):
 Download from: https://dev.mysql.com/downloads/
 Install MySQL Server and optionally MySQL Workbench.
-
-### 3.2 Create database:
-- Open MySQL Workbench.
-- Run the SQL script createDb.sql found in the project root.
 
 
 ## 4 Setup Local LLM with Ollama
