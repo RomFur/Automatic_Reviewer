@@ -2,24 +2,27 @@
 
 ## 1 Setup backend
 
-### 1.1 Create virtual environment:
+### 1.1 Navigate to backend folder and create virtual environment:
+
 ```bash
-   python -m venv venv
-```
-### 1.2 Activate the environment:
- On windows: 
- ```bash
 cd backend
+python -m venv venv
+```
+
+### 1.2 Activate the envirnoment:
+
+-On Windows:
+```bash
 venv\Scripts\activate
 ```
-On Mac/Linux:
- ```bash
+
+-On Mac/Linux:
+```bash
 source venv/bin/activate
 ```
 
-### 1.3 Install dependencies:
+### 1.3 Install dependecies:
 ```bash
-cd backend
 pip install -r requirements.txt
+```
 
-  
