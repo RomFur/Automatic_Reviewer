@@ -88,7 +88,7 @@ function TreemapPage({ credentials }) {
         }));
 
         setChartData(formatted);
-        setSelectedSport(null); /
+        setSelectedSport(null);
       })
       .catch(() => setError('database connection error'));
   };
