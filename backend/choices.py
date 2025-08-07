@@ -1,5 +1,5 @@
 SPORT_CHOICES = [
-    "American Football", "Football", "Soccer", "Volleyball", "Beach Volleyball", "Tennis",
+    "American Football", "Soccer", "Volleyball", "Beach Volleyball", "Tennis",
     "Paddle‑Tennis", "Table Tennis", "Basketball", "Rugby", "Badminton", "Athletics",
     "Baseball", "Softball", "Cricket", "Golf", "Hockey", "Ice Hockey",
     "Field Hockey", "Handball", "Swimming", "Cycling", "Skiing",

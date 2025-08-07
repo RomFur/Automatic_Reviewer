@@ -5,11 +5,13 @@ import {
 
 function ArticleTrendsBySport({ credentials, onLogout }) {
   const [chartData, setChartData] = useState(null);
-  const [error, setError] = useState('');
+  const [topSports, setTopSports] = useState([]);
   const [availableSports, setAvailableSports] = useState([]);
-  const [selectedSport, setSelectedSport] = useState('');
   const [articlesMap, setArticlesMap] = useState({});
+  const [selectedSport, setSelectedSport] = useState('');
   const [selectedYear, setSelectedYear] = useState(null);
+  const [viewMode, setViewMode] = useState('top'); 
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const headers = {
@@ -29,46 +31,81 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
 
         const trendDataMap = {};
         const articlesByYearSport = {};
+        const sportTotals = {};
 
         data.forEach(({ year, sport, ut, title }) => {
           if (!year || !sport || sport === 'None') return;
 
-          const yearStr = String(year).trim();
-          const sportStr = sport.trim();
+          const y = String(year).trim();
+          const s = sport.trim();
 
-          // Count for chart
-          if (!trendDataMap[yearStr]) trendDataMap[yearStr] = {};
-          trendDataMap[yearStr][sportStr] = (trendDataMap[yearStr][sportStr] || 0) + 1;
+          sportTotals[s] = (sportTotals[s] || 0) + 1;
 
-          // Group articles by year and sport
-          if (!articlesByYearSport[yearStr]) articlesByYearSport[yearStr] = {};
-          if (!articlesByYearSport[yearStr][sportStr]) articlesByYearSport[yearStr][sportStr] = [];
-          articlesByYearSport[yearStr][sportStr].push({ ut, title });
+          if (!trendDataMap[y]) trendDataMap[y] = {};
+          trendDataMap[y][s] = (trendDataMap[y][s] || 0) + 1;
+
+          if (!articlesByYearSport[y]) articlesByYearSport[y] = {};
+          if (!articlesByYearSport[y][s]) articlesByYearSport[y][s] = [];
+          articlesByYearSport[y][s].push({ ut, title });
         });
+
+        const top5 = Object.entries(sportTotals)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5)
+          .map(([s]) => s);
 
         const allYears = Object.keys(trendDataMap).sort((a, b) => a - b);
-        const sportsSet = new Set();
-        allYears.forEach((year) => {
-          Object.keys(trendDataMap[year]).forEach((sport) => sportsSet.add(sport));
-        });
+        const allSports = Array.from(new Set(Object.keys(sportTotals))).sort();
 
-        const sports = Array.from(sportsSet).sort();
-
-        const formattedData = allYears.map((year) => {
+        const topFormatted = allYears.map((year) => {
           const row = { year };
-          sports.forEach((sport) => {
-            row[sport] = trendDataMap[year][sport] || 0;
+          top5.forEach((sport) => {
+            row[sport] = trendDataMap[year]?.[sport] || 0;
           });
           return row;
         });
 
-        setAvailableSports(sports);
-        setSelectedSport(sports[0] || '');
-        setChartData(formattedData);
+        const customFormatted = allYears.map((year) => {
+          const row = { year };
+          allSports.forEach((sport) => {
+            row[sport] = trendDataMap[year]?.[sport] || 0;
+          });
+          return row;
+        });
+
+        setTopSports(top5);
+        setAvailableSports(allSports);
+        setSelectedSport(allSports[0] || '');
+        setChartData({ top: topFormatted, custom: customFormatted });
         setArticlesMap(articlesByYearSport);
       })
       .catch(() => setError('database connection error'));
   }, [credentials]);
+
+  const handlePointClick = (data) => {
+    if (!data || !data.activeLabel) return;
+
+    const year = data.activeLabel;
+
+    if (viewMode === 'custom' ) {
+      setSelectedYear(year);
+    } else {
+      const clicked = data.activePayload.find((entry) =>
+        topSports.includes(entry.dataKey)
+      );
+      if (clicked) {
+        setSelectedYear(year);
+        setSelectedSport(clicked.dataKey);
+      }
+    }
+  };
+
+  const selectedArticles =
+    selectedYear && selectedSport && articlesMap[selectedYear]
+      ? articlesMap[selectedYear][selectedSport] || []
+      : [];
+
+  const colors = ['#8884d8', '#82ca9d', '#ff7300', '#ff69b4', '#00bcd4', '#a83232', '#2c82c9', '#f4c542'];
 
   if (error) {
     return (
@@ -82,22 +119,14 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
   }
 
   if (!chartData) {
-    return <p>Loading sport trends...</p>;
+    return <p>Loading sports trend data...</p>;
   }
 
-  const handlePointClick = (data) => {
-    if (!data || !data.activeLabel) return;
-    setSelectedYear(data.activeLabel);
-  };
-
-  const selectedArticles =
-    selectedYear && selectedSport && articlesMap[selectedYear]
-      ? articlesMap[selectedYear][selectedSport] || []
-      : [];
+  const activeData = viewMode === 'custom' ? chartData.custom : chartData.top;
 
   return (
     <div className="w-full max-w-6xl h-[600px] bg-white p-6 rounded shadow-md flex overflow-hidden">
-      {/* Chart Area */}
+      {/* Chart Section */}
       <div
         className="transition-all duration-500 ease-in-out"
         style={{
@@ -107,24 +136,42 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
         }}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Article Trends by Sport Over Years</h2>
-          <select
-            value={selectedSport}
-            onChange={(e) => {
-              setSelectedSport(e.target.value);
-              setSelectedYear(null);
-            }}
-            className="border border-gray-300 rounded px-3 py-1"
-          >
-            {availableSports.map((sport) => (
-              <option key={sport} value={sport}>{sport}</option>
-            ))}
-          </select>
+          <h2 className="text-2xl font-bold">
+            {viewMode === 'top' ? 'Top 5 Sports Trends' : 'Trends by Selected Sport'}
+          </h2>
+          <div className="flex space-x-4 items-center">
+            <select
+              value={viewMode}
+              onChange={(e) => {
+                setViewMode(e.target.value);
+                setSelectedYear(null);
+              }}
+              className="border rounded px-3 py-1"
+            >
+              <option value="top">Top 5 Sports</option>
+              <option value="custom">Custom Sport</option>
+            </select>
+
+            {viewMode === 'custom' && (
+              <select
+                value={selectedSport}
+                onChange={(e) => {
+                  setSelectedSport(e.target.value);
+                  setSelectedYear(null);
+                }}
+                className="border rounded px-3 py-1"
+              >
+                {availableSports.map((sport) => (
+                  <option key={sport} value={sport}>{sport}</option>
+                ))}
+              </select>
+            )}
+          </div>
         </div>
 
         <ResponsiveContainer width="100%" height="90%">
           <LineChart
-            data={chartData}
+            data={activeData}
             margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
             onClick={handlePointClick}
           >
@@ -133,21 +180,32 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
             <YAxis allowDecimals={false} />
             <Tooltip />
             <Legend />
-            {selectedSport && (
-              <Line
-                type="monotone"
-                dataKey={selectedSport}
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-                cursor="pointer"
-              />
-            )}
+            {viewMode === 'top'
+              ? topSports.map((sport, i) => (
+                  <Line
+                    key={sport}
+                    type="monotone"
+                    dataKey={sport}
+                    stroke={colors[i % colors.length]}
+                    activeDot={{ r: 8 }}
+                    cursor="pointer"
+                  />
+                ))
+              : selectedSport && (
+                  <Line
+                    type="monotone"
+                    dataKey={selectedSport}
+                    stroke={colors[0]}
+                    activeDot={{ r: 8 }}
+                    cursor="pointer"
+                  />
+                )}
           </LineChart>
         </ResponsiveContainer>
       </div>
 
       {/* Sidebar */}
-      {selectedYear && (
+      {selectedYear && selectedSport && (
         <div className="w-[30%] bg-gray-50 border-l border-gray-300 p-6 overflow-y-auto">
           <button
             className="mb-4 text-gray-600 hover:text-gray-900"
@@ -183,119 +241,3 @@ function ArticleTrendsBySport({ credentials, onLogout }) {
 }
 
 export default ArticleTrendsBySport;
-
-
-
-/* import React, { useEffect, useState } from 'react';
-import {
-  LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer,
-} from 'recharts';
-
-function ArticleTrendsBySport({ credentials, onLogout }) {
-  const [chartData, setChartData] = useState(null);
-  const [error, setError] = useState('');
-  const [availableSports, setAvailableSports] = useState([]);
-  const [selectedSport, setSelectedSport] = useState('');
-
-  useEffect(() => {
-    const headers = {
-      'x-db-host': credentials.host,
-      'x-db-database': credentials.database,
-      'x-db-user': credentials.user,
-      'x-db-password': credentials.password,
-    };
-
-    fetch('http://localhost:8000/articles/', { headers })
-      .then(async (res) => {
-        if (!res.ok) throw new Error('database connection error');
-        return res.json();
-      })
-      .then((json) => {
-        const trendDataMap = {};
-
-        json.forEach(({ year, sport }) => {
-          if (!year || !sport) return;
-
-          const yearStr = String(year).trim();
-          const sportStr = sport.trim();
-
-          if (sportStr === 'None') return; // skip None
-
-          if (!trendDataMap[yearStr]) trendDataMap[yearStr] = {};
-          trendDataMap[yearStr][sportStr] = (trendDataMap[yearStr][sportStr] || 0) + 1;
-        });
-
-        const allYears = Object.keys(trendDataMap).sort((a, b) => a - b);
-        const sportsSet = new Set();
-        allYears.forEach((year) => {
-          Object.keys(trendDataMap[year]).forEach((sport) => sportsSet.add(sport));
-        });
-
-        const sports = Array.from(sportsSet).sort();
-
-        const formattedData = allYears.map((year) => {
-          const row = { year };
-          sports.forEach((sport) => {
-            row[sport] = trendDataMap[year][sport] || 0;
-          });
-          return row;
-        });
-
-        setAvailableSports(sports);
-        setSelectedSport(sports[0] || '');
-        setChartData(formattedData);
-      })
-      .catch(() => setError('database connection error'));
-  }, [credentials]);
-
-  if (error) {
-    return (
-      <div className="bg-white p-6 rounded shadow-md text-center max-w-md">
-        <p className="text-red-600 font-semibold mb-4">{error}</p>
-        <button onClick={onLogout} className="bg-gray-700 text-white px-4 py-2 rounded">
-          Try Again
-        </button>
-      </div>
-    );
-  }
-
-  if (!chartData) {
-    return <p>Loading sport trends...</p>;
-  }
-
-  return (
-    <div className="w-full max-w-6xl h-[600px] bg-white p-6 rounded shadow-md">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Article Trends by Sport Over Years</h2>
-
-        <select
-          value={selectedSport}
-          onChange={(e) => setSelectedSport(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-1"
-        >
-          {availableSports.map((sport) => (
-            <option key={sport} value={sport}>
-              {sport}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <ResponsiveContainer width="100%" height="90%">
-        <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" />
-          <YAxis allowDecimals={false} />
-          <Tooltip />
-          <Legend />
-          {selectedSport && (
-            <Line type="monotone" dataKey={selectedSport} stroke="#8884d8" activeDot={{ r: 8 }} />
-          )}
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
-export default ArticleTrendsBySport;
-*/ 

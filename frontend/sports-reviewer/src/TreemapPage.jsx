@@ -72,7 +72,7 @@ function TreemapPage({ credentials }) {
         return res.json();
       })
       .then((filteredArticles) => {
-        setAllArticles(filteredArticles); // Update full article list
+        setAllArticles(filteredArticles); 
 
         const sportCount = {};
         filteredArticles.forEach((item) => {
@@ -88,7 +88,7 @@ function TreemapPage({ credentials }) {
         }));
 
         setChartData(formatted);
-        setSelectedSport(null); // Reset sidebar if filters are reapplied
+        setSelectedSport(null); /
       })
       .catch(() => setError('database connection error'));
   };
