@@ -16,6 +16,15 @@ function OutcomeTreemapPage({ credentials }) {
   const [selectedOutcome, setSelectedOutcome] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
 
+  // Utility to extract individual outcome terms cleanly
+  const extractOutcomes = (outcomeString) => {
+    return outcomeString
+      .replace(/[\[\]"]+/g, '') // remove brackets and quotes
+      .split(',')               // split on comma
+      .map((o) => o.trim())      // remove spaces
+      .filter((o) => o);         // remove empty strings
+  };
+
   useEffect(() => {
     const headers = {
       'x-db-host': credentials.host,
@@ -36,14 +45,18 @@ function OutcomeTreemapPage({ credentials }) {
         json.articles.forEach((item) => {
           const outcome = item.outcome;
           if (outcome && outcome !== 'None') {
-            outcomeCount[outcome] = (outcomeCount[outcome] || 0) + 1;
+            extractOutcomes(outcome).forEach((o) => {
+              outcomeCount[o] = (outcomeCount[o] || 0) + 1;
+            });
           }
         });
 
-        const formatted = Object.entries(outcomeCount).map(([name, size]) => ({
-          name,
-          size,
-        }));
+        const formatted = Object.entries(outcomeCount)
+          .filter(([name]) => name.toLowerCase() !== 'none')
+          .map(([name, size]) => ({
+            name,
+            size,
+          }));
 
         setChartData(formatted);
         setChoices(json.filters);
@@ -78,14 +91,18 @@ function OutcomeTreemapPage({ credentials }) {
         filteredArticles.forEach((item) => {
           const outcome = item.outcome;
           if (outcome && outcome !== 'None') {
-            outcomeCount[outcome] = (outcomeCount[outcome] || 0) + 1;
+            extractOutcomes(outcome).forEach((o) => {
+              outcomeCount[o] = (outcomeCount[o] || 0) + 1;
+            });
           }
         });
 
-        const formatted = Object.entries(outcomeCount).map(([name, size]) => ({
-          name,
-          size,
-        }));
+        const formatted = Object.entries(outcomeCount)
+          .filter(([name]) => name.toLowerCase() !== 'none')
+          .map(([name, size]) => ({
+            name,
+            size,
+          }));
 
         setChartData(formatted);
         setSelectedOutcome(null);
@@ -112,7 +129,11 @@ function OutcomeTreemapPage({ credentials }) {
   }
 
   const selectedArticles = selectedOutcome
-    ? allArticles.filter((a) => a.outcome === selectedOutcome)
+    ? allArticles.filter(
+        (a) =>
+          a.outcome &&
+          extractOutcomes(a.outcome).includes(selectedOutcome)
+      )
     : [];
 
   return (
