@@ -1,3 +1,10 @@
+# About
+
+## A tool for automation of systematic reviews using a locally run large language model.
+
+This tool has a backend that can read, analyze and categorize scientific articles in sports technology, and store the reuslts in a database.
+The frontend is a web based interface that makes it possible for the user to filter and sort the stored articles, based on relevant categories and visualize trends.
+
 # Setup guide
 
 
